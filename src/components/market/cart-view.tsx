@@ -14,6 +14,7 @@ const paymentLabels = {
 
 export function CartView() {
   const [cart, setCart] = useState<Product[]>([]);
+  const [cartKey, setCartKey] = useState("kanomenak-cart-anonymous");
   const [authenticated, setAuthenticated] = useState(false);
   const [loginPrompt, setLoginPrompt] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<keyof typeof paymentLabels>("WAVE");
@@ -22,11 +23,46 @@ export function CartView() {
   const [vendorNotifications, setVendorNotifications] = useState<string[]>([]);
 
   useEffect(() => {
-    const load = () => setCart(JSON.parse(localStorage.getItem("kanomenak-cart") || "[]"));
-    load();
-    fetch("/api/auth/session").then((response) => response.json()).then((data) => setAuthenticated(Boolean(data.authenticated))).catch(() => setAuthenticated(false));
-    window.addEventListener("kanomenak-storage", load);
-    return () => window.removeEventListener("kanomenak-storage", load);
+    let activeKey = "kanomenak-cart-anonymous";
+    const read = (key: string) => {
+      try {
+        return JSON.parse(localStorage.getItem(key) || "[]") as Product[];
+      } catch {
+        return [];
+      }
+    };
+    const mergeUnique = (items: Product[]) => items.filter((product, index, list) => list.findIndex((item) => item.id === product.id) === index);
+    const load = (key = activeKey) => {
+      const merged = mergeUnique([...read(key), ...read("kanomenak-cart"), ...read("kanomenak-cart-anonymous")]);
+      if (merged.length) {
+        localStorage.setItem(key, JSON.stringify(merged));
+        localStorage.removeItem("kanomenak-cart");
+        if (key !== "kanomenak-cart-anonymous") localStorage.removeItem("kanomenak-cart-anonymous");
+      }
+      setCart(merged);
+    };
+    fetch("/api/auth/session")
+      .then((response) => response.json())
+      .then((data) => {
+        activeKey = data.cartKey || "kanomenak-cart-anonymous";
+        setCartKey(activeKey);
+        setAuthenticated(Boolean(data.authenticated));
+        load(activeKey);
+      })
+      .catch(() => {
+        setAuthenticated(false);
+        load(activeKey);
+      });
+    const onStorage = (event: Event) => {
+      const detailKey = event instanceof CustomEvent ? event.detail?.key : null;
+      if (!detailKey || detailKey === activeKey) load(activeKey);
+    };
+    window.addEventListener("kanomenak-storage", onStorage);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("kanomenak-storage", onStorage);
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
   const total = useMemo(() => cart.reduce((sum, product) => sum + product.price, 0), [cart]);
@@ -46,7 +82,8 @@ export function CartView() {
   function remove(id: string) {
     const next = cart.filter((product) => product.id !== id);
     setCart(next);
-    localStorage.setItem("kanomenak-cart", JSON.stringify(next));
+    localStorage.setItem(cartKey, JSON.stringify(next));
+    window.dispatchEvent(new CustomEvent("kanomenak-storage", { detail: { key: cartKey } }));
   }
 
   function downloadInvoice() {

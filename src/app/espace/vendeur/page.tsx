@@ -19,7 +19,7 @@ export default function SellerDashboard() {
             <h2 className="text-2xl font-black text-slate-950">Actions vendeur</h2>
             <p className="text-sm font-semibold text-slate-600">Boutons dedies a la gestion de boutique.</p>
           </div>
-          <Link href="/espace/vendeur/produits" className="hidden rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white md:block">Ajouter un produit</Link>
+          <Link href="/espace/vendeur/produits" className="inline-flex w-full items-center justify-center rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white sm:w-auto">Ajouter un produit</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           <ActionTile href="/espace/vendeur/produits" label="Ajouter produit" description="Publier un article avec image, prix, stock et categorie." icon={PackagePlus} />

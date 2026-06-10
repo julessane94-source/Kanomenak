@@ -24,7 +24,7 @@ export default function CourierDashboard() {
             <h2 className="text-2xl font-black text-slate-950">Actions livreur</h2>
             <p className="text-sm font-semibold text-slate-600">Boutons reserves au suivi de livraison et a la position GPS.</p>
           </div>
-          <div className="hidden rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white md:block">Statut disponible</div>
+          <div className="inline-flex w-full items-center justify-center rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white sm:w-auto">Statut disponible</div>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           <ActionTile href="/espace/livreur/missions" label="Voir missions" description="Accepter ou refuser les livraisons disponibles." icon={CheckCircle} />

@@ -49,7 +49,7 @@ export function MarketView() {
             <h2 className="text-2xl font-black text-slate-950">Marche</h2>
             <p className="text-sm font-bold text-slate-600">{category}</p>
           </div>
-          <Link href="/espace/client/commandes" className="hidden items-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-sm hover:-translate-y-0.5 hover:bg-emerald-50 md:flex"><Truck className="size-4" /> Livraison suivie</Link>
+          <Link href="/espace/client/commandes" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-sm hover:-translate-y-0.5 hover:bg-emerald-50 sm:w-auto"><Truck className="size-4" /> Livraison suivie</Link>
         </div>
         <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
           <button type="button" onClick={() => setCategory("Tous")} className={`shrink-0 rounded-xl border px-4 py-2.5 text-sm font-black shadow-sm ${category === "Tous" ? "border-emerald-800 bg-emerald-800 text-white" : "border-emerald-100 bg-white text-slate-700 hover:bg-emerald-50"}`}>Tous</button>

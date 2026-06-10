@@ -22,7 +22,7 @@ export default function ClientDashboard() {
             <h2 className="text-2xl font-black text-slate-950">Actions client</h2>
             <p className="text-sm font-semibold text-slate-600">Boutons pour acheter, suivre et payer rapidement.</p>
           </div>
-          <Link href="/" className="hidden rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white md:block">Retour au marche</Link>
+          <Link href="/" className="inline-flex w-full items-center justify-center rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white sm:w-auto">Retour au marche</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           <ActionTile href="/" label="Rechercher" description="Trouver produits, boutiques et categories." icon={Search} tone="light" />

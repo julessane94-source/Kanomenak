@@ -7,16 +7,3 @@
 - Network:       http://192.168.1.32:3000
 - Environments: .env
 ✓ Ready in 4.2s
-
-○ Compiling /espace/admin ...
- GET /espace/admin 200 in 24.5s (next.js: 18.8s, application-code: 5.7s)
- POST /api/auth/login 200 in 5.3s (next.js: 5.1s, application-code: 191ms)
- GET /api/auth/session 200 in 1743ms (next.js: 1699ms, application-code: 44ms)
- GET /espace/admin 200 in 649ms (next.js: 16ms, application-code: 633ms)
- POST /api/auth/login 200 in 44ms (next.js: 15ms, application-code: 29ms)
- GET /espace/admin 200 in 747ms (next.js: 15ms, application-code: 732ms)
-✓ Compiled in 2.1s
- GET /espace/admin 200 in 4.6s (next.js: 1729ms, application-code: 2.8s)
- GET /espace/admin 200 in 1841ms (next.js: 37ms, application-code: 1804ms)
- GET /espace/admin 200 in 1225ms (next.js: 40ms, application-code: 1185ms)
- GET /espace/admin 200 in 1251ms (next.js: 483ms, application-code: 768ms)
