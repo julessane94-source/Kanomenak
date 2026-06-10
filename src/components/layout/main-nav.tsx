@@ -29,8 +29,12 @@ export async function MainNav() {
               {link.label}
             </Link>
           ))}
-          <Link href="/signalement" className="grid size-9 place-items-center rounded-xl text-amber-700 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm" title="Signaler"><AlertTriangle className="size-4" /></Link>
-          <Link href="/profil" className="grid size-9 place-items-center rounded-xl text-emerald-800 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm" title="Profil"><UserCircle className="size-4" /></Link>
+          {isConnected && (
+            <>
+              <Link href="/signalement" className="grid size-9 place-items-center rounded-xl text-amber-700 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm" title="Signaler"><AlertTriangle className="size-4" /></Link>
+              <Link href="/profil" className="grid size-9 place-items-center rounded-xl text-emerald-800 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm" title="Profil"><UserCircle className="size-4" /></Link>
+            </>
+          )}
         </div>
         {isConnected ? (
           <div className="hidden items-center gap-2 md:flex">

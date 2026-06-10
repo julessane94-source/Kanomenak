@@ -11,6 +11,8 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [method, setMethod] = useState<"email" | "phone" | "google">("email");
+  const [info, setInfo] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,7 +26,7 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
           email: String(form.get("email") || ""),
           phone: String(form.get("phone") || ""),
           password: String(form.get("password") || ""),
-          provider: "credentials"
+          provider: method === "google" ? "google" : method === "phone" ? "phone" : "credentials"
         }
       : {
           identifier: String(form.get("identifier") || ""),
@@ -60,15 +62,37 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
           Connexion securisee par email, Google ou telephone.
         </p>
         <div className="mt-6 grid gap-3 text-sm text-slate-700">
-          {["Email ou Google", "Telephone", "Mot de passe modifiable"].map((item) => (
-            <div key={item} className="rounded-lg border border-slate-200 bg-white p-3 font-semibold shadow-sm">{item}</div>
+          {[
+            { label: "Email ou Google", value: "email" as const, message: "Connexion par email activee." },
+            { label: "Telephone", value: "phone" as const, message: "Connexion par telephone activee." },
+            { label: "Mot de passe modifiable", value: "email" as const, message: "Apres connexion, allez dans Profil puis Mot de passe." }
+          ].map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => {
+                setMethod(item.value);
+                setInfo(item.message);
+              }}
+              className={`rounded-xl border p-3 text-left font-black shadow-sm transition hover:-translate-y-0.5 ${method === item.value ? "border-emerald-700 bg-emerald-50 text-emerald-900" : "border-slate-200 bg-white text-slate-700"}`}
+            >
+              {item.label}
+            </button>
           ))}
+          {info && <p className="rounded-xl bg-emerald-50 p-3 text-xs font-black text-emerald-800">{info}</p>}
         </div>
       </section>
 
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm md:p-7">
         <div className="grid gap-3">
-          <button className="flex h-12 items-center justify-center gap-2 rounded-md border border-slate-200 font-bold text-slate-800">
+          <button
+            type="button"
+            onClick={() => {
+              setMethod("google");
+              setInfo("Mode Google selectionne. OAuth reel a brancher au deploiement.");
+            }}
+            className={`flex h-12 items-center justify-center gap-2 rounded-xl border font-black text-slate-800 ${method === "google" ? "border-emerald-700 bg-emerald-50" : "border-slate-200 bg-white"}`}
+          >
             <BadgeCheck className="size-5" /> Continuer avec Google
           </button>
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-xs font-bold uppercase text-slate-400">
@@ -105,10 +129,10 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
             </>
           ) : (
             <label className="grid gap-2 text-sm font-bold text-slate-700">
-              Email ou telephone
+              {method === "phone" ? "Telephone" : "Email ou telephone"}
               <span className="flex items-center gap-2 rounded-md border border-slate-200 px-3">
-                <Mail className="size-4 text-slate-400" />
-                <input name="identifier" className="h-11 min-w-0 flex-1 outline-none" placeholder="email ou telephone" required />
+                {method === "phone" ? <Phone className="size-4 text-slate-400" /> : <Mail className="size-4 text-slate-400" />}
+                <input name="identifier" className="h-11 min-w-0 flex-1 outline-none" placeholder={method === "phone" ? "+221 77 000 00 00" : "email ou telephone"} required />
               </span>
             </label>
           )}
