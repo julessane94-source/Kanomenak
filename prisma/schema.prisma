@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  VENDEUR
+  LIVREUR
+  CLIENT
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  ASSIGNED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  WAVE
+  ORANGE_MONEY
+  CASH_ON_DELIVERY
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(CLIENT)
+  city      String?
+  phone     String?
+  authProvider String  @default("credentials")
+  passwordUpdatedAt DateTime @default(now())
+  rating    Float    @default(0)
+  createdAt DateTime @default(now())
+  shop      Shop?
+  products  Product[] @relation("SellerProducts")
+  orders    Order[]   @relation("ClientOrders")
+  deliveries Delivery[]
+  reviews   Review[]
+}
+
+model Shop {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  city        String
+  ownerId     String   @unique
+  owner       User     @relation(fields: [ownerId], references: [id])
+  products    Product[]
+  createdAt   DateTime @default(now())
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  image       String
+  stock       Int      @default(0)
+  city        String
+  sales       Int      @default(0)
+  rating      Float    @default(0)
+  reviewCount Int      @default(0)
+  score       Float    @default(0)
+  sellerId    String
+  seller      User     @relation("SellerProducts", fields: [sellerId], references: [id])
+  shopId      String?
+  shop        Shop?    @relation(fields: [shopId], references: [id])
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  code          String        @unique
+  status        OrderStatus   @default(PENDING)
+  paymentMethod PaymentMethod
+  total         Int
+  address       String
+  clientId      String
+  client        User          @relation("ClientOrders", fields: [clientId], references: [id])
+  items         OrderItem[]
+  delivery      Delivery?
+  createdAt     DateTime      @default(now())
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  unitPrice Int
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Delivery {
+  id          String      @id @default(cuid())
+  fee         Int
+  currentLat  Float?
+  currentLng  Float?
+  orderId     String      @unique
+  order       Order       @relation(fields: [orderId], references: [id])
+  courierId   String
+  courier     User        @relation(fields: [courierId], references: [id])
+  status      OrderStatus @default(ASSIGNED)
+  createdAt   DateTime    @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  priority    String   @default("NORMAL")
+  status      String   @default("OPEN")
+  reporterId  String?
+  reporterRole String?
+  pageUrl     String?
+  createdAt   DateTime @default(now())
+}
