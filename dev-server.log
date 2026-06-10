@@ -9,3 +9,30 @@
 ✓ Ready in 76s
 ○ Compiling middleware ...
 
+ POST /api/auth/login 200 in 12.4s (next.js: 11.7s, application-code: 708ms)
+ GET / 200 in 5.2s (next.js: 1475ms, application-code: 3.8s)
+ GET /connexion 200 in 1544ms (next.js: 548ms, application-code: 996ms)
+ GET /connexion 200 in 1880ms (next.js: 67ms, application-code: 1813ms)
+ POST /api/auth/login 200 in 454ms (next.js: 392ms, application-code: 62ms)
+ GET / 200 in 1535ms (next.js: 100ms, application-code: 1435ms)
+ GET / 200 in 1364ms (next.js: 52ms, application-code: 1312ms)
+ GET /connexion 200 in 1507ms (next.js: 38ms, application-code: 1468ms)
+ GET /espace 200 in 1157ms (next.js: 633ms, application-code: 524ms)
+ GET /connexion 200 in 1357ms (next.js: 190ms, application-code: 1167ms)
+ GET /connexion 200 in 679ms (next.js: 82ms, application-code: 597ms)
+✓ Compiled in 33.5s
+ GET /connexion 200 in 36.9s (next.js: 28.2s, application-code: 8.7s)
+ GET /connexion 200 in 5.7s (next.js: 1203ms, application-code: 4.5s)
+ GET /connexion 200 in 3.2s (next.js: 104ms, application-code: 3.1s)
+ GET /connexion 200 in 1848ms (next.js: 117ms, application-code: 1732ms)
+ GET /connexion 200 in 1881ms (next.js: 1026ms, application-code: 855ms)
+ GET /connexion 200 in 1865ms (next.js: 700ms, application-code: 1164ms)
+✓ Finished filesystem cache database compaction in 15.3s
+ GET /connexion 200 in 2.1s (next.js: 53ms, application-code: 2.1s)
+ GET /connexion 200 in 1485ms (next.js: 98ms, application-code: 1387ms)
+ GET /connexion 200 in 513ms (next.js: 49ms, application-code: 464ms)
+ GET /connexion 200 in 2.3s (next.js: 36ms, application-code: 2.2s)
+ GET /connexion 200 in 1532ms (next.js: 79ms, application-code: 1453ms)
+ GET /connexion 200 in 828ms (next.js: 60ms, application-code: 767ms)
+ GET /connexion 200 in 776ms (next.js: 45ms, application-code: 731ms)
+ GET /connexion 200 in 2.2s (next.js: 51ms, application-code: 2.1s)
