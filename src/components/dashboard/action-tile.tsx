@@ -8,10 +8,10 @@ export function ActionTile({ href, label, description, icon: Icon, tone = "prima
     <Link
       href={href}
       className={primary
-        ? "group flex min-h-32 items-start gap-4 rounded-lg bg-emerald-800 p-5 text-white shadow-sm ring-1 ring-emerald-500/20 hover:-translate-y-0.5 hover:bg-emerald-900 hover:shadow-md"
-        : "group flex min-h-32 items-start gap-4 rounded-lg border border-emerald-100 bg-white p-5 text-slate-900 shadow-sm ring-1 ring-white/70 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md"}
+        ? "group flex min-h-32 items-start gap-4 rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-950 p-5 text-white shadow-sm shadow-emerald-950/10 ring-1 ring-emerald-500/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/15"
+        : "group flex min-h-32 items-start gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-slate-900 shadow-sm shadow-emerald-950/5 ring-1 ring-white/70 hover:-translate-y-1 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-xl hover:shadow-emerald-950/10"}
     >
-      <span className={primary ? "grid size-12 shrink-0 place-items-center rounded-md bg-white/15" : "grid size-12 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700"}>
+      <span className={primary ? "grid size-12 shrink-0 place-items-center rounded-xl bg-white/15" : "grid size-12 shrink-0 place-items-center rounded-xl bg-emerald-100 text-emerald-700"}>
         <Icon className="size-5" />
       </span>
       <span>

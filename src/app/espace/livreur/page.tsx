@@ -3,6 +3,7 @@ import { KpiCard } from "@/components/dashboard/kpi-card";
 import { ActionTile } from "@/components/dashboard/action-tile";
 import { ActionButton } from "@/components/interactive/action-button";
 import { StatusBoard } from "@/components/dashboard/status-board";
+import { NotificationCenter } from "@/components/notifications/notification-center";
 import { courierKpis } from "@/lib/data";
 import { AlertTriangle, CheckCircle, Clock, History, MapPin, Navigation, Route, Settings, UserCircle, Wallet } from "lucide-react";
 
@@ -52,8 +53,9 @@ export default function CourierDashboard() {
         </div>
       </div>
 
-      <section className="mt-6 grid gap-4 md:grid-cols-4">
+      <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatusBoard title="Suivi livreur" items={[{ label: "Mission active", value: "KMK-0007", tone: "blue" }, { label: "Livraisons en retard", value: "1", tone: "amber" }, { label: "Position partagee", value: "Active", tone: "green" }]} />
+        <NotificationCenter role="LIVREUR" />
         <div className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm"><Clock className="size-5 text-emerald-700" /><h3 className="mt-3 font-black">Ponctualite</h3><p className="text-sm text-slate-600">93% des livraisons dans les delais.</p></div>
         <div className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm"><Wallet className="size-5 text-emerald-700" /><h3 className="mt-3 font-black">Paiements</h3><p className="text-sm text-slate-600">Retraits suivis par mission.</p></div>
         <div className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm"><History className="size-5 text-emerald-700" /><h3 className="mt-3 font-black">Historique</h3><p className="text-sm text-slate-600">Courses archivees avec preuve.</p></div>

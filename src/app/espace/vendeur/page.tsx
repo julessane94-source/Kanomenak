@@ -4,6 +4,7 @@ import { KpiCard } from "@/components/dashboard/kpi-card";
 import { SimpleChart } from "@/components/dashboard/simple-chart";
 import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
+import { NotificationCenter } from "@/components/notifications/notification-center";
 import { sellerKpis, products } from "@/lib/data";
 import { AlertTriangle, Bell, ClipboardList, Megaphone, PackagePlus, Settings, Star, Store, UserCircle, Wallet } from "lucide-react";
 
@@ -49,6 +50,7 @@ export default function SellerDashboard() {
           { label: "Produits a recharger", value: "3", tone: "blue" },
           { label: "Avis sans reponse", value: "7", tone: "amber" }
         ]} />
+        <NotificationCenter role="VENDEUR" />
         <section className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm lg:col-span-2">
           <h2 className="text-lg font-black text-slate-950">Produits populaires</h2>
           <div className="mt-4 grid gap-3">{products.slice(0, 4).map((p) => <div key={p.id} className="grid gap-2 rounded-md bg-slate-50 p-3 sm:grid-cols-[1fr_auto_auto]"><span className="font-semibold">{p.name}</span><span>{p.sales} ventes</span><strong className="text-emerald-700">{p.score}% visibilite</strong></div>)}</div>

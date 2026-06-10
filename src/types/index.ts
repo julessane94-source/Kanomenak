@@ -3,6 +3,7 @@ export type Role = "admin" | "vendeur" | "livreur" | "client";
 export type Product = {
   id: string;
   name: string;
+  description: string;
   category: string;
   seller: string;
   city: string;

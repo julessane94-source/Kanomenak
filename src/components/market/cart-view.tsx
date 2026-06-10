@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ShoppingBag, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { Download, ShoppingBag, Trash2 } from "lucide-react";
 import type { Product } from "@/types";
 import { formatPrice } from "@/lib/data";
-import { ActionButton } from "@/components/interactive/action-button";
 
 export function CartView() {
   const [cart, setCart] = useState<Product[]>([]);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loginPrompt, setLoginPrompt] = useState(false);
 
   useEffect(() => {
     const load = () => setCart(JSON.parse(localStorage.getItem("kanomenak-cart") || "[]"));
     load();
+    fetch("/api/auth/session").then((response) => response.json()).then((data) => setAuthenticated(Boolean(data.authenticated))).catch(() => setAuthenticated(false));
     window.addEventListener("kanomenak-storage", load);
     return () => window.removeEventListener("kanomenak-storage", load);
   }, []);
@@ -22,6 +25,35 @@ export function CartView() {
     const next = cart.filter((product) => product.id !== id);
     setCart(next);
     localStorage.setItem("kanomenak-cart", JSON.stringify(next));
+  }
+
+  function downloadInvoice() {
+    const lines = [
+      "FACTURE KANOMENAK",
+      "Reference: KMK-" + Date.now().toString().slice(-6),
+      "Date: " + new Date().toLocaleDateString("fr-FR"),
+      "",
+      ...cart.map((product) => `- ${product.name} | ${product.seller} | ${formatPrice(product.price)}`),
+      "",
+      "Livraison: " + (cart.length ? formatPrice(1500) : formatPrice(0)),
+      "Total: " + formatPrice(cart.length ? total + 1500 : 0)
+    ];
+    const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "facture-kanomenak.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function order() {
+    if (!authenticated) {
+      setLoginPrompt(true);
+      return;
+    }
+    setLoginPrompt(false);
+    alert("Commande creee avec succes.");
   }
 
   return (
@@ -51,7 +83,13 @@ export function CartView() {
           <div className="flex justify-between"><span>Livraison estimee</span><strong>{cart.length ? formatPrice(1500) : formatPrice(0)}</strong></div>
           <div className="flex justify-between border-t border-slate-200 pt-3 text-base"><span>Total</span><strong>{formatPrice(cart.length ? total + 1500 : 0)}</strong></div>
         </div>
-        <div className="mt-5"><ActionButton label="Commander" doneLabel="Commande creee" icon="ShoppingBag" full /></div>
+        <button type="button" onClick={order} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-emerald-800 font-black text-white shadow-sm shadow-emerald-900/20 hover:bg-emerald-900"><ShoppingBag className="size-4" /> Commander</button>
+        {loginPrompt && (
+          <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm font-bold text-amber-900">
+            Connectez-vous pour commander. <Link href="/connexion?next=/panier" className="underline">Se connecter</Link>
+          </div>
+        )}
+        <button type="button" onClick={downloadInvoice} disabled={!cart.length} className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-md border border-emerald-200 bg-white font-black text-emerald-800 disabled:cursor-not-allowed disabled:opacity-50"><Download className="size-4" /> Telecharger facture</button>
         <p className="mt-3 text-xs text-slate-500">Paiement Wave, Orange Money ou paiement a la livraison.</p>
       </aside>
     </main>

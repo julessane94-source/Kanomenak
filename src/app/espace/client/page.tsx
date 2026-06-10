@@ -2,6 +2,7 @@ import Link from "next/link";
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
+import { NotificationCenter } from "@/components/notifications/notification-center";
 import { ProductCard } from "@/components/market/product-card";
 import { products } from "@/lib/data";
 import { AlertTriangle, CreditCard, Heart, PackageCheck, Search, Settings, ShoppingBasket, Star, Truck, UserCircle } from "lucide-react";
@@ -47,6 +48,9 @@ export default function ClientDashboard() {
       </div>
       <div className="mt-6">
         <StatusBoard title="Suivi client" items={[{ label: "Commande en livraison", value: "KMK-0001", tone: "blue" }, { label: "Paiement prefere", value: "Wave", tone: "green" }, { label: "Produits favoris", value: "8", tone: "amber" }]} />
+      </div>
+      <div className="mt-6">
+        <NotificationCenter role="CLIENT" />
       </div>
     </DashboardShell>
   );

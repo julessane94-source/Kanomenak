@@ -4,6 +4,7 @@ import { KpiCard } from "@/components/dashboard/kpi-card";
 import { SimpleChart } from "@/components/dashboard/simple-chart";
 import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
+import { NotificationCenter } from "@/components/notifications/notification-center";
 import { adminKpis, products } from "@/lib/data";
 import { AlertTriangle, Bike, CreditCard, Flag, PackageCheck, Plus, Shield, Store, Tags, UserCircle, Users, WalletCards } from "lucide-react";
 
@@ -59,6 +60,7 @@ export default function AdminDashboard() {
           { label: "Commandes sensibles", value: "6 alertes", tone: "amber" },
           { label: "Paiements confirmes", value: "92%", tone: "green" }
         ]} />
+        <NotificationCenter role="ADMIN" />
         <section className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
           <h2 className="flex items-center gap-2 text-lg font-black text-slate-950"><Users className="size-5 text-emerald-700" /> Regles de comptes</h2>
           <div className="mt-4 grid gap-3 text-sm text-slate-700">
