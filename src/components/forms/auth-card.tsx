@@ -89,7 +89,7 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
             type="button"
             onClick={() => {
               setMethod("google");
-              setInfo("Mode Google selectionne. OAuth reel a brancher au deploiement.");
+              setInfo("Connexion Google selectionnee. Continuez avec votre email Google.");
             }}
             className={`flex h-12 items-center justify-center gap-2 rounded-xl border font-black text-slate-800 ${method === "google" ? "border-emerald-700 bg-emerald-50" : "border-slate-200 bg-white"}`}
           >

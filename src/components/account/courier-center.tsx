@@ -1,13 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, MapPin, Navigation, Wallet, XCircle } from "lucide-react";
+import { CheckCircle, MapPin, MessageCircle, Navigation, PhoneCall, Wallet, XCircle } from "lucide-react";
 
 const initialMissions = [
-  { code: "KMK-0001", zone: "Plateau", fee: "1 500 FCFA", status: "Disponible" },
-  { code: "KMK-0007", zone: "Medina", fee: "2 000 FCFA", status: "Disponible" },
-  { code: "KMK-0012", zone: "Almadies", fee: "2 500 FCFA", status: "Disponible" }
+  { code: "KMK-0001", zone: "Plateau", fee: "1 500 FCFA", status: "Disponible", clientPhone: "+221770001122", lat: 14.6937, lng: -17.4441 },
+  { code: "KMK-0007", zone: "Medina", fee: "2 000 FCFA", status: "Disponible", clientPhone: "+221781112233", lat: 14.6829, lng: -17.4566 },
+  { code: "KMK-0012", zone: "Almadies", fee: "2 500 FCFA", status: "Disponible", clientPhone: "+221762223344", lat: 14.7468, lng: -17.5125 }
 ];
+
+function openWhatsApp(phone: string, code: string) {
+  window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent("Bonjour, je suis le livreur kanomenak pour la commande " + code)}`, "_blank", "noopener,noreferrer");
+}
+
+function openCall(phone: string) {
+  window.location.href = `tel:${phone}`;
+}
+
+function openGps(lat: number, lng: number) {
+  window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, "_blank", "noopener,noreferrer");
+}
 
 export function CourierMissionsCenter() {
   const [missions, setMissions] = useState(initialMissions);
@@ -21,6 +33,8 @@ export function CourierMissionsCenter() {
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => setMissions((current) => current.map((item) => item.code === mission.code ? { ...item, status: "Acceptee" } : item))} className="flex h-11 items-center gap-2 rounded-md bg-emerald-700 px-4 font-black text-white"><CheckCircle className="size-4" /> Accepter</button>
               <button type="button" onClick={() => setMissions((current) => current.map((item) => item.code === mission.code ? { ...item, status: "Refusee" } : item))} className="flex h-11 items-center gap-2 rounded-md border border-slate-200 px-4 font-black text-slate-700"><XCircle className="size-4" /> Refuser</button>
+              <button type="button" onClick={() => openWhatsApp(mission.clientPhone, mission.code)} className="flex h-11 items-center gap-2 rounded-md border border-emerald-200 bg-white px-4 font-black text-emerald-800"><MessageCircle className="size-4" /> WhatsApp</button>
+              <button type="button" onClick={() => openGps(mission.lat, mission.lng)} className="flex h-11 items-center gap-2 rounded-md border border-slate-200 bg-white px-4 font-black text-slate-700"><MapPin className="size-4" /> Position</button>
             </div>
           </div>
         </article>
@@ -32,6 +46,9 @@ export function CourierMissionsCenter() {
 export function CourierMapCenter() {
   const [active, setActive] = useState(false);
   const [delivered, setDelivered] = useState(false);
+  const phone = "+221781112233";
+  const lat = 14.6829;
+  const lng = -17.4566;
   return (
     <main className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="flex items-center gap-2 text-3xl font-black text-slate-950"><MapPin className="size-7 text-emerald-700" /> Carte GPS</h1>
@@ -47,6 +64,9 @@ export function CourierMapCenter() {
           <div className="mt-4 grid gap-2">
             <button type="button" onClick={() => setActive(true)} className="flex h-11 items-center justify-center gap-2 rounded-md bg-emerald-700 px-4 font-black text-white"><Navigation className="size-4" /> {active ? "Itineraire actif" : "Demarrer itineraire"}</button>
             <button type="button" onClick={() => setDelivered(true)} className="flex h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-4 font-black text-slate-700"><CheckCircle className="size-4" /> {delivered ? "Livraison confirmee" : "Confirmer livraison"}</button>
+            <button type="button" onClick={() => openWhatsApp(phone, "KMK-0007")} className="flex h-11 items-center justify-center gap-2 rounded-md border border-emerald-200 px-4 font-black text-emerald-800"><MessageCircle className="size-4" /> Contacter WhatsApp</button>
+            <button type="button" onClick={() => openCall(phone)} className="flex h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-4 font-black text-slate-700"><PhoneCall className="size-4" /> Appeler</button>
+            <button type="button" onClick={() => openGps(lat, lng)} className="flex h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-4 font-black text-slate-700"><MapPin className="size-4" /> Voir position GPS</button>
           </div>
         </div>
       </section>

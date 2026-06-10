@@ -4,12 +4,23 @@ import { useState } from "react";
 import { Heart, MessageCircle, ShoppingCart } from "lucide-react";
 import type { Product } from "@/types";
 
-function saveItem(key: string, product: Product) {
+async function scopedKey(kind: "cart" | "favorites") {
+  try {
+    const response = await fetch("/api/auth/session");
+    const data = await response.json();
+    return kind === "cart" ? data.cartKey || "kanomenak-cart-anonymous" : data.favoritesKey || "kanomenak-favorites-anonymous";
+  } catch {
+    return kind === "cart" ? "kanomenak-cart-anonymous" : "kanomenak-favorites-anonymous";
+  }
+}
+
+async function saveItem(kind: "cart" | "favorites", product: Product) {
+  const key = await scopedKey(kind);
   const current = JSON.parse(localStorage.getItem(key) || "[]") as Product[];
   const exists = current.some((item) => item.id === product.id);
   const next = exists ? current : [...current, product];
   localStorage.setItem(key, JSON.stringify(next));
-  window.dispatchEvent(new Event("kanomenak-storage"));
+  window.dispatchEvent(new CustomEvent("kanomenak-storage", { detail: { key } }));
 }
 
 export function ProductActions({ product }: { product: Product }) {
@@ -20,9 +31,9 @@ export function ProductActions({ product }: { product: Product }) {
     <div className="grid gap-2">
       <button
         type="button"
-        onClick={() => {
-          saveItem("kanomenak-cart", product);
-          setStatus("Produit ajoute au panier");
+        onClick={async () => {
+          await saveItem("cart", product);
+          setStatus("Produit ajoute a votre panier");
         }}
         className="flex h-11 items-center justify-center gap-2 rounded-xl bg-emerald-800 px-4 font-black text-white shadow-sm shadow-emerald-900/20 hover:-translate-y-0.5 hover:bg-emerald-900"
       >
@@ -31,9 +42,9 @@ export function ProductActions({ product }: { product: Product }) {
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
-          onClick={() => {
-            saveItem("kanomenak-favorites", product);
-            setStatus("Produit ajoute aux favoris");
+          onClick={async () => {
+            await saveItem("favorites", product);
+            setStatus("Produit ajoute a vos favoris");
           }}
           className="flex h-11 items-center justify-center gap-2 rounded-xl border border-emerald-100 bg-white px-3 font-black text-slate-700 shadow-sm hover:-translate-y-0.5 hover:bg-emerald-50"
         >

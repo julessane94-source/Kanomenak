@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { BarChart3, Settings } from "lucide-react";
-import { LogoutButton } from "@/components/dashboard/logout-button";
 
 export function DashboardShell({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
@@ -15,7 +14,6 @@ export function DashboardShell({ title, subtitle, children }: { title: string; s
             </div>
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
               <Link href="/parametres/securite" className="flex h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 text-sm font-black text-white hover:bg-white/20"><Settings className="size-4" /> Securite</Link>
-              <LogoutButton />
             </div>
           </div>
         </div>
