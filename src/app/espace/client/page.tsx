@@ -31,7 +31,6 @@ export default function ClientDashboard() {
           <ActionTile href="/espace/client/paiements" label="Paiements" description="Gerer Wave, Orange Money et paiement livraison." icon={CreditCard} tone="light" />
           <ActionTile href="/parametres/securite" label="Mot de passe" description="Modifier vos acces de connexion." icon={Settings} tone="light" />
           <ActionTile href="/signalement" label="Signaler erreur" description="Declarer un souci d'achat ou de livraison." icon={AlertTriangle} tone="light" />
-          <ActionTile href="/profil" label="Profil" description="Modifier vos infos et photo de profil." icon={UserCircle} tone="light" />
         </div>
       </section>
 

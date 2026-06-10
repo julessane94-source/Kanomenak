@@ -33,7 +33,6 @@ export default function CourierDashboard() {
           <ActionTile href="/espace/livreur/revenus" label="Revenus" description="Suivre gains, courses et paiements." icon={Wallet} tone="light" />
           <ActionTile href="/parametres/securite" label="Mot de passe" description="Modifier les acces du compte livreur." icon={Settings} tone="light" />
           <ActionTile href="/signalement" label="Signaler erreur" description="Declarer un souci de mission ou GPS." icon={AlertTriangle} tone="light" />
-          <ActionTile href="/profil" label="Profil" description="Modifier vos infos et photo de profil." icon={UserCircle} tone="light" />
         </div>
       </section>
 

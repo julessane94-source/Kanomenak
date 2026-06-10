@@ -34,8 +34,7 @@ export default function AdminDashboard() {
           <ActionTile href="/espace/admin/paiements" label="Paiements" description="Controler Wave, Orange Money et cash." icon={CreditCard} tone="light" />
           <ActionTile href="/categories" label="Categories" description="Organiser les rayons et filtres du marche." icon={Tags} tone="light" />
           <ActionTile href="/espace/admin/paiements" label="Commissions" description="Suivre marges, reversements et frais." icon={WalletCards} tone="light" />
-          <ActionTile href="/signalement" label="Signalements" description="Voir ou creer un ticket d'erreur." icon={AlertTriangle} tone="light" />
-          <ActionTile href="/profil" label="Profil" description="Modifier informations et photo de profil." icon={UserCircle} tone="light" />
+          <ActionTile href="/espace/admin/signalements" label="Signalements" description="Traiter les tickets ouverts par les utilisateurs." icon={AlertTriangle} tone="light" />
         </div>
       </section>
 

@@ -28,7 +28,6 @@ export default function SellerDashboard() {
           <ActionTile href="/espace/vendeur/produits" label="Booster produit" description="Mettre en avant un article performant." icon={Megaphone} tone="light" />
           <ActionTile href="/parametres/securite" label="Mot de passe" description="Modifier vos acces et renforcer la securite." icon={Settings} tone="light" />
           <ActionTile href="/signalement" label="Signaler erreur" description="Declarer un souci de commande, produit ou paiement." icon={AlertTriangle} tone="light" />
-          <ActionTile href="/profil" label="Profil" description="Modifier vos infos et photo de profil." icon={UserCircle} tone="light" />
         </div>
       </section>
 
