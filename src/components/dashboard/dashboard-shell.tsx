@@ -12,9 +12,7 @@ export function DashboardShell({ title, subtitle, children }: { title: string; s
               <h1 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">{title}</h1>
               <p className="mt-3 max-w-2xl text-sm font-semibold text-emerald-50">{subtitle}</p>
             </div>
-            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-              <Link href="/parametres/securite" className="flex h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 text-sm font-black text-white hover:bg-white/20"><Settings className="size-4" /> Securite</Link>
-            </div>
+            <Link href="/parametres/securite" className="flex h-11 w-fit items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 text-sm font-black text-white hover:bg-white/20"><Settings className="size-4" /> Securite</Link>
           </div>
         </div>
       </section>

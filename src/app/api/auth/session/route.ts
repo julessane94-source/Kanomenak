@@ -5,9 +5,12 @@ export async function GET() {
   const cookieStore = await cookies();
   const session = cookieStore.get("kmk_session")?.value;
   const role = cookieStore.get("kmk_role")?.value || null;
+  const storageSuffix = session || "anonymous";
 
   return NextResponse.json({
     authenticated: Boolean(session),
-    role
+    role,
+    cartKey: `kanomenak-cart-${storageSuffix}`,
+    favoritesKey: `kanomenak-favorites-${storageSuffix}`
   });
 }

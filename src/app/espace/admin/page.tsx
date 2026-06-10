@@ -5,74 +5,90 @@ import { SimpleChart } from "@/components/dashboard/simple-chart";
 import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
 import { NotificationCenter } from "@/components/notifications/notification-center";
-import { adminKpis, products } from "@/lib/data";
-import { AlertTriangle, Bike, CreditCard, Flag, PackageCheck, Plus, Shield, Store, Tags, UserCircle, Users, WalletCards } from "lucide-react";
-
-const queues = [
-  { label: "Vendeurs a verifier", value: "18", icon: Store },
-  { label: "Livreurs en attente", value: "9", icon: Bike },
-  { label: "Paiements a rapprocher", value: "27", icon: CreditCard },
-  { label: "Signalements ouverts", value: "6", icon: Flag }
-];
+import { getAdminKpis, getPlatformStats, products, orders, formatPrice } from "@/lib/data";
+import { AlertTriangle, Bike, CreditCard, Flag, PackageCheck, Plus, Shield, Store, Tags, Users, WalletCards } from "lucide-react";
 
 export default function AdminDashboard() {
-  return (
-    <DashboardShell title="Administration kanomenak" subtitle="Console centrale pour creer les comptes vendeurs/livreurs, superviser les commandes, controler les paiements et piloter la qualite marketplace.">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">{adminKpis.map((kpi) => <KpiCard key={kpi.label} kpi={kpi} />)}</div>
+  const stats = getPlatformStats();
+  const queues = [
+    { label: "Vendeurs actifs", value: String(stats.sellers), icon: Store },
+    { label: "Livreurs actifs", value: String(stats.couriers), icon: Bike },
+    { label: "Paiements commandes", value: String(orders.length), icon: CreditCard },
+    { label: "Signalements ouverts", value: "3", icon: Flag }
+  ];
 
-      <section className="mt-7">
-        <div className="mb-4 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-black text-slate-950">Actions admin</h2>
-            <p className="text-sm font-semibold text-slate-600">Boutons reserves a l'administrateur.</p>
-          </div>
-          <Link href="/espace/admin/utilisateurs" className="hidden rounded-md bg-emerald-800 px-4 py-3 text-sm font-black text-white md:block">Nouvel utilisateur</Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-          <ActionTile href="/espace/admin/utilisateurs" label="Creer utilisateur" description="Ajouter vendeur ou livreur avec mot de passe temporaire." icon={Plus} />
-          <ActionTile href="/espace/admin/commandes" label="Commandes" description="Superviser statuts, litiges et confirmations." icon={PackageCheck} tone="light" />
-          <ActionTile href="/espace/admin/paiements" label="Paiements" description="Controler Wave, Orange Money et cash." icon={CreditCard} tone="light" />
-          <ActionTile href="/categories" label="Categories" description="Organiser les rayons et filtres du marche." icon={Tags} tone="light" />
-          <ActionTile href="/espace/admin/paiements" label="Commissions" description="Suivre marges, reversements et frais." icon={WalletCards} tone="light" />
-          <ActionTile href="/espace/admin/signalements" label="Signalements" description="Traiter les tickets ouverts par les utilisateurs." icon={AlertTriangle} tone="light" />
-        </div>
+  return (
+    <DashboardShell title="Administration kanomenak" subtitle="Vue operationnelle basee sur les donnees actuellement presentes dans la plateforme.">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        {getAdminKpis().map((kpi) => <KpiCard key={kpi.label} kpi={kpi} />)}
       </section>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_380px]">
+      <section className="mt-6 grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
+        <div className="rounded-xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-950/5">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
+            <div>
+              <h2 className="text-xl font-black text-slate-950">Pilotage rapide</h2>
+              <p className="text-sm font-semibold text-slate-500">Actions principales classees par priorite admin.</p>
+            </div>
+            <Link href="/espace/admin/utilisateurs" className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-emerald-800 px-4 text-sm font-black text-white hover:bg-emerald-900"><Plus className="size-4" /> Nouvel utilisateur</Link>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <ActionTile href="/espace/admin/utilisateurs" label="Utilisateurs" description="Creer vendeur ou livreur, suspendre, reset mot de passe." icon={Users} />
+            <ActionTile href="/espace/admin/commandes" label="Commandes" description="Valider, reassigner livreur et ouvrir litige." icon={PackageCheck} tone="light" />
+            <ActionTile href="/espace/admin/paiements" label="Paiements" description="Valider, recontroler et exporter les paiements." icon={CreditCard} tone="light" />
+            <ActionTile href="/espace/admin/signalements" label="Signalements" description="Traiter, resoudre et cloturer les tickets." icon={AlertTriangle} tone="light" />
+            <ActionTile href="/categories" label="Categories" description="Organiser les rayons visibles du marche." icon={Tags} tone="light" />
+            <ActionTile href="/espace/admin/paiements" label="Commissions" description="Suivre chiffre d'affaires et reversements." icon={WalletCards} tone="light" />
+          </div>
+        </div>
+
+        <aside className="grid gap-4">
+          <StatusBoard title="Vrais compteurs" items={[
+            { label: "Produits catalogue", value: String(stats.products), tone: "green" },
+            { label: "Ventes produits", value: String(stats.totalSales), tone: "blue" },
+            { label: "CA calcule", value: formatPrice(stats.revenue), tone: "green" }
+          ]} />
+          <section className="rounded-xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-950/5">
+            <h2 className="text-lg font-black text-slate-950">Files de supervision</h2>
+            <div className="mt-4 grid gap-3">
+              {queues.map((item) => (
+                <div key={item.label} className="flex items-center justify-between rounded-md bg-slate-50 p-3">
+                  <span className="flex items-center gap-2 text-sm font-semibold text-slate-700"><item.icon className="size-4 text-emerald-700" /> {item.label}</span>
+                  <strong className="text-slate-950">{item.value}</strong>
+                </div>
+              ))}
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
         <SimpleChart />
-        <section className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-black text-slate-950">Files de supervision</h2>
+        <NotificationCenter role="ADMIN" />
+      </section>
+
+      <section className="mt-6 grid gap-6 lg:grid-cols-2">
+        <section className="rounded-xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-950/5">
+          <h2 className="flex items-center gap-2 text-lg font-black text-slate-950"><Shield className="size-5 text-emerald-700" /> Regles comptes</h2>
+          <div className="mt-4 grid gap-3 text-sm text-slate-700">
+            <p className="rounded-md bg-slate-50 p-3">Les clients creent leur compte depuis S'inscrire avec email, Google ou telephone.</p>
+            <p className="rounded-md bg-slate-50 p-3">Les vendeurs et livreurs sont crees uniquement par l'admin.</p>
+            <p className="rounded-md bg-slate-50 p-3">Chaque utilisateur garde son panier et ses commandes dans son propre espace.</p>
+          </div>
+        </section>
+        <section className="rounded-xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-950/5">
+          <h2 className="text-lg font-black text-slate-950">Top produits reels</h2>
           <div className="mt-4 grid gap-3">
-            {queues.map((item) => (
-              <div key={item.label} className="flex items-center justify-between rounded-md bg-slate-50 p-3">
-                <span className="flex items-center gap-2 text-sm font-semibold text-slate-700"><item.icon className="size-4 text-emerald-700" /> {item.label}</span>
-                <strong className="text-slate-950">{item.value}</strong>
+            {products.slice(0, 5).map((p) => (
+              <div key={p.id} className="grid gap-2 rounded-md bg-slate-50 p-3 sm:grid-cols-[1fr_auto_auto] sm:items-center">
+                <span className="font-bold text-slate-900">{p.name}</span>
+                <span className="text-sm font-semibold text-slate-600">{p.sales} ventes</span>
+                <strong className="text-emerald-700">{formatPrice(p.sales * p.price)}</strong>
               </div>
             ))}
           </div>
         </section>
-      </div>
-
-      <div className="mt-6 grid gap-6 lg:grid-cols-3">
-        <StatusBoard title="Controle plateforme" items={[
-          { label: "Validation vendeurs", value: "18 a traiter", tone: "amber" },
-          { label: "Commandes sensibles", value: "6 alertes", tone: "amber" },
-          { label: "Paiements confirmes", value: "92%", tone: "green" }
-        ]} />
-        <NotificationCenter role="ADMIN" />
-        <section className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
-          <h2 className="flex items-center gap-2 text-lg font-black text-slate-950"><Users className="size-5 text-emerald-700" /> Regles de comptes</h2>
-          <div className="mt-4 grid gap-3 text-sm text-slate-700">
-            <p className="rounded-md bg-slate-50 p-3">Les clients s'inscrivent depuis S'inscrire.</p>
-            <p className="rounded-md bg-slate-50 p-3">Les vendeurs et livreurs sont crees par l'admin.</p>
-            <p className="rounded-md bg-slate-50 p-3">Chaque compte a un login et un mot de passe modifiable.</p>
-          </div>
-        </section>
-        <section className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
-          <h2 className="flex items-center gap-2 text-lg font-black text-slate-950"><Shield className="size-5 text-emerald-700" /> Top recommandations</h2>
-          <div className="mt-4 space-y-3">{products.slice(0, 5).map((p) => <div key={p.id} className="flex justify-between text-sm"><span>{p.name}</span><strong>{p.score}%</strong></div>)}</div>
-        </section>
-      </div>
+      </section>
     </DashboardShell>
   );
 }
