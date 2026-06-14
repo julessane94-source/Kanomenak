@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import bcrypt from "bcryptjs";
+import { prisma } from "@/lib/db";
+import { setSessionCookies } from "@/lib/session";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -11,15 +14,22 @@ const schema = z.object({
 
 export async function POST(request: Request) {
   const payload = schema.parse(await request.json());
-  const response = NextResponse.json({
-    id: `client_${Date.now()}`,
-    role: "CLIENT",
-    redirectTo: "/espace/client",
-    passwordUpdatedAt: new Date().toISOString(),
-    ...payload
-  }, { status: 201 });
-
-  response.cookies.set("kmk_session", "demo-client-session", { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 7 });
-  response.cookies.set("kmk_role", "CLIENT", { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 7 });
+  const email = payload.email?.toLowerCase() || `phone-${payload.phone!.replace(/\D/g, "")}@kanomenak.local`;
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) {
+    return NextResponse.json({ error: "Compte deja existant" }, { status: 409 });
+  }
+  const user = await prisma.user.create({
+    data: {
+      name: payload.name,
+      email,
+      phone: payload.phone,
+      password: await bcrypt.hash(payload.password, 10),
+      role: "CLIENT",
+      authProvider: payload.provider
+    }
+  });
+  const response = NextResponse.json({ id: user.id, role: user.role, redirectTo: "/espace/client", passwordUpdatedAt: user.passwordUpdatedAt }, { status: 201 });
+  setSessionCookies(response, user.id, user.role);
   return response;
 }

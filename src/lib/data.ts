@@ -11,6 +11,8 @@ export const categories = [
   "Chaussures",
   "Beaute",
   "Sante",
+  "Pharmacies",
+  "Boulangeries",
   "Maison",
   "Construction",
   "Agriculture"
@@ -22,7 +24,9 @@ export const products: Product[] = [
   { id: "p3", name: "Smartphone 128 Go", description: "Telephone debloque, stockage 128 Go, bon rapport qualite-prix.", category: "Telephones", seller: "Tech Medina", city: "Thies", price: 145000, rating: 4.7, sales: 31, reviews: 18, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=900&auto=format&fit=crop", badge: "Nouveau", score: 78 },
   { id: "p4", name: "Baskets urbaines", description: "Chaussures confortables pour ville et marche quotidien.", category: "Chaussures", seller: "Style Market", city: "Pikine", price: 22000, rating: 4.5, sales: 55, reviews: 27, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=900&auto=format&fit=crop", badge: "Promo", score: 81 },
   { id: "p5", name: "Kit beaute naturel", description: "Selection de soins naturels pour routine personnelle.", category: "Beaute", seller: "Natura Shop", city: "Rufisque", price: 18000, rating: 4.9, sales: 42, reviews: 30, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=900&auto=format&fit=crop", badge: "Top note", score: 89 },
-  { id: "p6", name: "Lampe solaire maison", description: "Lampe solaire pratique pour maison, boutique ou cour.", category: "Maison", seller: "Eco Maison", city: "Dakar", price: 15500, rating: 4.4, sales: 39, reviews: 14, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=900&auto=format&fit=crop", badge: "Proche", score: 74 }
+  { id: "p6", name: "Lampe solaire maison", description: "Lampe solaire pratique pour maison, boutique ou cour.", category: "Maison", seller: "Eco Maison", city: "Dakar", price: 15500, rating: 4.4, sales: 39, reviews: 14, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=900&auto=format&fit=crop", badge: "Proche", score: 74 },
+  { id: "p7", name: "Trousse premiers soins", description: "Kit pharmacie avec pansements, antiseptique et essentiels de secours.", category: "Pharmacies", seller: "Pharmacie Plateau", city: "Dakar", price: 9500, rating: 4.8, sales: 28, reviews: 16, image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?q=80&w=900&auto=format&fit=crop", badge: "Sante", score: 88 },
+  { id: "p8", name: "Pack pains frais", description: "Selection de pains frais pour famille, boutique ou petit dejeuner.", category: "Boulangeries", seller: "Boulangerie Medina", city: "Dakar", price: 3500, rating: 4.7, sales: 73, reviews: 21, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=900&auto=format&fit=crop", badge: "Frais", score: 91 }
 ];
 
 export const adminKpis: Kpi[] = [

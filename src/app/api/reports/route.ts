@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { prisma } from "@/lib/db";
+import { getSession } from "@/lib/session";
 
 const schema = z.object({
   title: z.string().min(3),
@@ -12,10 +14,9 @@ const schema = z.object({
 
 export async function POST(request: Request) {
   const payload = schema.parse(await request.json());
-  return NextResponse.json({
-    id: `RPT-${Date.now().toString().slice(-6)}`,
-    status: "OPEN",
-    createdAt: new Date().toISOString(),
-    ...payload
-  }, { status: 201 });
+  const session = await getSession();
+  const report = await prisma.report.create({
+    data: { ...payload, reporterId: session.userId, reporterRole: payload.reporterRole || session.role }
+  });
+  return NextResponse.json({ id: report.id, status: report.status, createdAt: report.createdAt }, { status: 201 });
 }

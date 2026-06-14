@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -47,6 +47,7 @@ model User {
   orders    Order[]   @relation("ClientOrders")
   deliveries Delivery[]
   reviews   Review[]
+  notifications Notification[]
 }
 
 model Shop {
@@ -151,4 +152,15 @@ model Report {
   reporterRole String?
   pageUrl     String?
   createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  role      Role
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
