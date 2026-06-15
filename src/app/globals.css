@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6fbf7;
-  --foreground: #10201b;
-  --surface: rgba(255, 255, 255, 0.86);
-  --brand: #047857;
-  --brand-dark: #064e3b;
+  --background: #f5fbf7;
+  --foreground: #10211d;
+  --surface: rgba(255, 255, 255, 0.9);
+  --brand: #057a55;
+  --brand-dark: #053f32;
+  --brand-soft: #dff7ea;
+  --accent: #0f766e;
+  --gold: #d69e2e;
 }
 
 @theme inline {
@@ -27,9 +30,10 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 8% -8%, rgba(16, 185, 129, 0.20), transparent 25rem),
-    radial-gradient(circle at 92% 2%, rgba(14, 116, 144, 0.16), transparent 24rem),
-    linear-gradient(180deg, #fbfffd 0%, #f0fbf5 42%, #e7f4ec 100%);
+    radial-gradient(circle at 8% -8%, rgba(5, 122, 85, 0.22), transparent 26rem),
+    radial-gradient(circle at 86% 0%, rgba(15, 118, 110, 0.18), transparent 24rem),
+    radial-gradient(circle at 50% 105%, rgba(214, 158, 46, 0.13), transparent 26rem),
+    linear-gradient(180deg, #fbfffd 0%, #f3fbf6 38%, #e7f5ed 100%);
   color: var(--foreground);
   font-family: Inter, "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -54,13 +58,29 @@ textarea:focus-visible {
 }
 
 ::selection {
-  background: #bbf7d0;
-  color: #064e3b;
+  background: #b7f4d1;
+  color: #053f32;
 }
 
 .kmk-surface {
-  border: 1px solid rgba(16, 185, 129, 0.16);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 18px 48px rgba(6, 78, 59, 0.08);
+  border: 1px solid rgba(5, 122, 85, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 52px rgba(5, 63, 50, 0.09);
   backdrop-filter: blur(16px);
+}
+
+.kmk-brand-gradient {
+  background: linear-gradient(135deg, #053f32 0%, #057a55 48%, #0f766e 100%);
+}
+
+.kmk-premium-gradient {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.16), transparent 18rem),
+    linear-gradient(135deg, #042f27 0%, #065f46 42%, #0f766e 72%, #b7791f 130%);
+}
+
+.kmk-card {
+  border: 1px solid rgba(5, 122, 85, 0.12);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 42px rgba(5, 63, 50, 0.08);
 }

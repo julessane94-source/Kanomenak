@@ -24,9 +24,9 @@ export async function MainNav() {
           <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-700 to-teal-900 text-white shadow-sm shadow-emerald-900/20">K</span>
           <span className="truncate">kanomenak</span>
         </Link>
-        <div className="hidden items-center rounded-2xl border border-emerald-100 bg-emerald-50/70 p-1.5 shadow-inner xl:flex">
+        <div className="hidden items-center rounded-2xl border border-emerald-100 bg-white/70 p-1.5 shadow-inner shadow-emerald-950/5 xl:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-black text-slate-700 hover:-translate-y-0.5 hover:bg-white hover:text-emerald-800 hover:shadow-sm">
+            <Link key={link.href} href={link.href} className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-black text-slate-700 hover:-translate-y-0.5 hover:bg-emerald-950 hover:text-white hover:shadow-sm">
               <link.icon className="size-4" />
               {link.label}
             </Link>
@@ -41,20 +41,20 @@ export async function MainNav() {
         {isConnected ? (
           <div className="hidden items-center gap-2 md:flex">
             <Link href="/profil" className="flex items-center gap-2 rounded-xl border border-emerald-100 bg-white px-3 py-2.5 text-sm font-black text-emerald-800 shadow-sm hover:-translate-y-0.5"><UserCircle className="size-4" /> Profil</Link>
-            <Link href="/espace" className="flex items-center gap-2 rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-black text-white shadow-sm shadow-emerald-900/20 hover:-translate-y-0.5 hover:bg-emerald-900"><LayoutDashboard className="size-4" /> Espace</Link>
+            <Link href="/espace" className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-emerald-800 to-teal-700 px-4 py-2.5 text-sm font-black text-white shadow-sm shadow-emerald-900/25 hover:-translate-y-0.5 hover:from-emerald-950 hover:to-teal-800"><LayoutDashboard className="size-4" /> Espace</Link>
             <LogoutButton />
           </div>
         ) : (
           <div className="hidden items-center gap-2 md:flex">
             <Link href="/connexion" className="grid size-10 place-items-center rounded-xl border border-emerald-100 bg-white text-slate-700 shadow-sm hover:-translate-y-0.5" title="Connexion"><LogIn className="size-4" /></Link>
-            <Link href="/inscription" className="flex items-center gap-2 rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-black text-white shadow-sm shadow-emerald-900/20 hover:-translate-y-0.5 hover:bg-emerald-900"><UserPlus className="size-4" /> S'inscrire</Link>
+            <Link href="/inscription" className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-emerald-800 to-teal-700 px-4 py-2.5 text-sm font-black text-white shadow-sm shadow-emerald-900/25 hover:-translate-y-0.5 hover:from-emerald-950 hover:to-teal-800"><UserPlus className="size-4" /> S'inscrire</Link>
           </div>
         )}
       </nav>
-      <div className="border-t border-emerald-100 bg-white xl:hidden">
+      <div className="border-t border-emerald-100 bg-white/92 backdrop-blur-xl xl:hidden">
         <div className="flex gap-2 overflow-x-auto px-3 py-2 [scrollbar-width:none]">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="flex min-w-[82px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-emerald-50 bg-emerald-50/70 px-2 py-2 text-[11px] font-black text-slate-700">
+            <Link key={link.href} href={link.href} className="flex min-w-[82px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-emerald-100 bg-emerald-50/80 px-2 py-2 text-[11px] font-black text-emerald-950">
               <link.icon className="size-4" />
               <span className="max-w-[82px] truncate">{link.label}</span>
             </Link>
@@ -70,7 +70,7 @@ export async function MainNav() {
           ) : (
             <>
               <Link href="/connexion" className="flex min-w-[82px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-emerald-100 bg-white px-2 py-2 text-[11px] font-black text-slate-700"><LogIn className="size-4" /><span>Connexion</span></Link>
-              <Link href="/inscription" className="flex min-w-[92px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl bg-emerald-800 px-2 py-2 text-[11px] font-black text-white"><UserPlus className="size-4" /><span>S'inscrire</span></Link>
+              <Link href="/inscription" className="flex min-w-[92px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl bg-gradient-to-br from-emerald-800 to-teal-700 px-2 py-2 text-[11px] font-black text-white"><UserPlus className="size-4" /><span>S'inscrire</span></Link>
             </>
           )}
         </div>

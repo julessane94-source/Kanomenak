@@ -8,7 +8,7 @@ export function PartnerDirectory({ type }: { type: PartnerType }) {
   const list = partners.filter((partner) => partner.type === type);
   const title = type;
   const baseHref = type === "Pharmacies" ? "/pharmacies" : "/boulangeries";
-  const accent = type === "Pharmacies" ? "from-emerald-950 via-teal-900 to-cyan-800" : "from-amber-950 via-orange-800 to-emerald-800";
+  const accent = type === "Pharmacies" ? "from-emerald-950 via-teal-800 to-cyan-700" : "from-emerald-950 via-amber-800 to-teal-700";
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8">

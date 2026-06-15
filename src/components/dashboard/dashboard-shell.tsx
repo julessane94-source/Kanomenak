@@ -4,8 +4,8 @@ import { BarChart3, Settings } from "lucide-react";
 export function DashboardShell({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
     <main className="min-h-screen">
-      <section className="relative overflow-hidden border-b border-emerald-900/10 bg-emerald-950 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(52,211,153,0.28),transparent_32rem),radial-gradient(circle_at_90%_10%,rgba(45,212,191,0.18),transparent_24rem)]" />
+      <section className="relative overflow-hidden border-b border-emerald-900/10 kmk-premium-gradient text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(52,211,153,0.22),transparent_32rem),radial-gradient(circle_at_90%_10%,rgba(250,204,21,0.13),transparent_24rem)]" />
         <div className="relative mx-auto max-w-7xl px-4 py-7 sm:py-9">
           <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>

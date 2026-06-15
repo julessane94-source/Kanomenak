@@ -9,7 +9,7 @@ export function PartnerProducts({ type, slug }: { type: PartnerType; slug: strin
   const partner = partners.find((item) => item.type === type && item.slug === slug) || partners.find((item) => item.type === type)!;
   const items = products.filter((product) => product.seller === partner.name);
   const backHref = type === "Pharmacies" ? "/pharmacies" : "/boulangeries";
-  const accent = type === "Pharmacies" ? "from-emerald-950 via-teal-900 to-cyan-800" : "from-amber-950 via-orange-800 to-emerald-800";
+  const accent = type === "Pharmacies" ? "from-emerald-950 via-teal-800 to-cyan-700" : "from-emerald-950 via-amber-800 to-teal-700";
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8">

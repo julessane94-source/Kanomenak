@@ -2,7 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-emerald-900/10 bg-emerald-950 text-white">
+    <footer className="border-t border-emerald-900/10 kmk-premium-gradient text-white">
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <h2 className="text-xl font-black">kanomenak</h2>
