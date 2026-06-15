@@ -1,5 +1,15 @@
 import type { Kpi, Product } from "@/types";
 
+export type Partner = {
+  type: "Pharmacies" | "Boulangeries";
+  slug: string;
+  name: string;
+  city: string;
+  description: string;
+  rating: number;
+  image: string;
+};
+
 export const categories = [
   "Alimentation",
   "Fruits et legumes",
@@ -26,7 +36,18 @@ export const products: Product[] = [
   { id: "p5", name: "Kit beaute naturel", description: "Selection de soins naturels pour routine personnelle.", category: "Beaute", seller: "Natura Shop", city: "Rufisque", price: 18000, rating: 4.9, sales: 42, reviews: 30, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=900&auto=format&fit=crop", badge: "Top note", score: 89 },
   { id: "p6", name: "Lampe solaire maison", description: "Lampe solaire pratique pour maison, boutique ou cour.", category: "Maison", seller: "Eco Maison", city: "Dakar", price: 15500, rating: 4.4, sales: 39, reviews: 14, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=900&auto=format&fit=crop", badge: "Proche", score: 74 },
   { id: "p7", name: "Trousse premiers soins", description: "Kit pharmacie avec pansements, antiseptique et essentiels de secours.", category: "Pharmacies", seller: "Pharmacie Plateau", city: "Dakar", price: 9500, rating: 4.8, sales: 28, reviews: 16, image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?q=80&w=900&auto=format&fit=crop", badge: "Sante", score: 88 },
-  { id: "p8", name: "Pack pains frais", description: "Selection de pains frais pour famille, boutique ou petit dejeuner.", category: "Boulangeries", seller: "Boulangerie Medina", city: "Dakar", price: 3500, rating: 4.7, sales: 73, reviews: 21, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=900&auto=format&fit=crop", badge: "Frais", score: 91 }
+  { id: "p8", name: "Gel antiseptique familial", description: "Solution d'hygiene pour maison, bureau et commerce.", category: "Pharmacies", seller: "Pharmacie Plateau", city: "Dakar", price: 4200, rating: 4.7, sales: 44, reviews: 19, image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?q=80&w=900&auto=format&fit=crop", badge: "Disponible", score: 85 },
+  { id: "p9", name: "Pack hygiene sante", description: "Produits courants de pharmacie a utiliser selon conseil professionnel.", category: "Pharmacies", seller: "Pharmacie Sedhiou", city: "Sedhiou", price: 7800, rating: 4.6, sales: 22, reviews: 11, image: "https://images.unsplash.com/photo-1576602976047-174e57a47881?q=80&w=900&auto=format&fit=crop", badge: "Sedhiou", score: 82 },
+  { id: "p10", name: "Pack pains frais", description: "Selection de pains frais pour famille, boutique ou petit dejeuner.", category: "Boulangeries", seller: "Boulangerie Medina", city: "Dakar", price: 3500, rating: 4.7, sales: 73, reviews: 21, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=900&auto=format&fit=crop", badge: "Frais", score: 91 },
+  { id: "p11", name: "Baguettes artisanales", description: "Baguettes croustillantes preparees le matin.", category: "Boulangeries", seller: "Boulangerie Medina", city: "Dakar", price: 2500, rating: 4.8, sales: 96, reviews: 33, image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?q=80&w=900&auto=format&fit=crop", badge: "Chaud", score: 90 },
+  { id: "p12", name: "Viennoiseries du matin", description: "Assortiment de croissants et pains au lait pour livraison locale.", category: "Boulangeries", seller: "Fournil Sedhiou", city: "Sedhiou", price: 4800, rating: 4.6, sales: 41, reviews: 15, image: "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=900&auto=format&fit=crop", badge: "Local", score: 84 }
+];
+
+export const partners: Partner[] = [
+  { type: "Pharmacies", slug: "pharmacie-plateau", name: "Pharmacie Plateau", city: "Dakar", description: "Pharmacie enrolee avec produits de premiers soins, hygiene et commandes rapides.", rating: 4.8, image: "https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" },
+  { type: "Pharmacies", slug: "pharmacie-sedhiou", name: "Pharmacie Sedhiou", city: "Sedhiou", description: "Point sante local pour les produits courants disponibles sur kanomenak.", rating: 4.6, image: "https://images.unsplash.com/photo-1576765608866-5b51046452be?q=80&w=1200&auto=format&fit=crop" },
+  { type: "Boulangeries", slug: "boulangerie-medina", name: "Boulangerie Medina", city: "Dakar", description: "Boulangerie enrolee pour pains frais, baguettes et commandes du matin.", rating: 4.7, image: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?q=80&w=1200&auto=format&fit=crop" },
+  { type: "Boulangeries", slug: "fournil-sedhiou", name: "Fournil Sedhiou", city: "Sedhiou", description: "Fournil local avec pains et viennoiseries disponibles en livraison.", rating: 4.6, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop" }
 ];
 
 export const adminKpis: Kpi[] = [

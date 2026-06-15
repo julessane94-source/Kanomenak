@@ -5,8 +5,8 @@ import { LogoutButton } from "@/components/dashboard/logout-button";
 
 const links = [
   { href: "/", label: "Marche", icon: Store },
-  { href: "/?categorie=Pharmacies", label: "Pharmacies", icon: Pill },
-  { href: "/?categorie=Boulangeries", label: "Boulangeries", icon: Croissant },
+  { href: "/pharmacies", label: "Pharmacies", icon: Pill },
+  { href: "/boulangeries", label: "Boulangeries", icon: Croissant },
   { href: "/categories", label: "Categories", icon: Tags },
   { href: "/panier", label: "Panier", icon: ShoppingBasket },
   { href: "/favoris", label: "Favoris", icon: Heart },
