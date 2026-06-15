@@ -4,6 +4,7 @@ import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
 import { NotificationCenter } from "@/components/notifications/notification-center";
 import { ProductCard } from "@/components/market/product-card";
+import { AvailableCouriersPanel } from "@/components/couriers/available-couriers-panel";
 import { products } from "@/lib/data";
 import { AlertTriangle, CreditCard, Heart, PackageCheck, Search, Settings, ShoppingBasket, Star, Truck, UserCircle } from "lucide-react";
 
@@ -39,10 +40,13 @@ export default function ClientDashboard() {
           <h2 className="text-xl font-black text-slate-950">Recommandes pour vous</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{products.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} />)}</div>
         </section>
-        <aside className="h-fit rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-black text-slate-950">Compte client</h2>
-          <p className="mt-2 text-sm text-slate-600">Connexion par email, Google ou telephone. Mot de passe modifiable a tout moment.</p>
-          <Link href="/parametres/securite" className="mt-4 flex items-center justify-center gap-2 rounded-md border border-slate-200 px-4 py-3 font-bold text-slate-700">Modifier mot de passe</Link>
+        <aside className="grid h-fit gap-4">
+          <div className="rounded-lg border border-emerald-100 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-black text-slate-950">Compte client</h2>
+            <p className="mt-2 text-sm text-slate-600">Connexion par email, Google ou telephone. Mot de passe modifiable a tout moment.</p>
+            <Link href="/parametres/securite" className="mt-4 flex items-center justify-center gap-2 rounded-md border border-slate-200 px-4 py-3 font-bold text-slate-700">Modifier mot de passe</Link>
+          </div>
+          <AvailableCouriersPanel compact title="Livreurs disponibles" />
         </aside>
       </div>
       <div className="mt-6">

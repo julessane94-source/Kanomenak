@@ -1,4 +1,4 @@
-export type Role = "admin" | "vendeur" | "livreur" | "client";
+export type Role = "admin" | "vendeur" | "livreur" | "client" | "pharmacie" | "boulangerie";
 
 export type Product = {
   id: string;

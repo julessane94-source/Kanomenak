@@ -59,12 +59,22 @@ async function main() {
   const livreur = await prisma.user.upsert({
     where: { email: "livreur@kanomenak.com" },
     update: {},
-    create: { name: "Moussa Livraison", email: "livreur@kanomenak.com", password: defaultPassword, role: Role.LIVREUR, city: "Dakar", rating: 4.7 }
+    create: { name: "Moussa Livraison", email: "livreur@kanomenak.com", password: defaultPassword, role: Role.LIVREUR, city: "Dakar", rating: 4.7, isAvailable: true }
   });
   const client = await prisma.user.upsert({
     where: { email: "client@kanomenak.com" },
     update: {},
     create: { name: "Client Demo", email: "client@kanomenak.com", password: defaultPassword, role: Role.CLIENT, city: "Dakar" }
+  });
+  const pharmacie = await prisma.user.upsert({
+    where: { email: "pharmacie@kanomenak.com" },
+    update: { accountType: "PHARMACIE" },
+    create: { name: "Pharmacie Plateau", email: "pharmacie@kanomenak.com", password: defaultPassword, role: Role.VENDEUR, accountType: "PHARMACIE", city: "Dakar", phone: "+221778851691", rating: 4.8 }
+  });
+  const boulangerie = await prisma.user.upsert({
+    where: { email: "boulangerie@kanomenak.com" },
+    update: { accountType: "BOULANGERIE" },
+    create: { name: "Boulangerie Medina", email: "boulangerie@kanomenak.com", password: defaultPassword, role: Role.VENDEUR, accountType: "BOULANGERIE", city: "Dakar", phone: "+221775335320", rating: 4.7 }
   });
 
   for (const name of categoryNames) {
@@ -75,6 +85,16 @@ async function main() {
     where: { slug: "awa-boutique" },
     update: {},
     create: { name: "Awa Boutique", slug: "awa-boutique", description: "Produits frais et articles populaires du marche urbain.", city: "Dakar", ownerId: vendeur.id }
+  });
+  await prisma.shop.upsert({
+    where: { slug: "pharmacie-plateau" },
+    update: {},
+    create: { name: "Pharmacie Plateau", slug: "pharmacie-plateau", description: "Pharmacie enrolee par l'administration kanomenak.", city: "Dakar", ownerId: pharmacie.id }
+  });
+  await prisma.shop.upsert({
+    where: { slug: "boulangerie-medina" },
+    update: {},
+    create: { name: "Boulangerie Medina", slug: "boulangerie-medina", description: "Boulangerie enrolee par l'administration kanomenak.", city: "Dakar", ownerId: boulangerie.id }
   });
 
   for (const product of productSeeds) {

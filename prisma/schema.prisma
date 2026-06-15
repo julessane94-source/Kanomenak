@@ -36,11 +36,13 @@ model User {
   email     String   @unique
   password  String
   role      Role     @default(CLIENT)
+  accountType String @default("STANDARD")
   city      String?
   phone     String?
   authProvider String  @default("credentials")
   passwordUpdatedAt DateTime @default(now())
   rating    Float    @default(0)
+  isAvailable Boolean @default(false)
   createdAt DateTime @default(now())
   shop      Shop?
   products  Product[] @relation("SellerProducts")

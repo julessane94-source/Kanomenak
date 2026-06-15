@@ -9,29 +9,37 @@ const schema = z.object({
   email: z.string().email(),
   phone: z.string().min(6),
   password: z.string().min(8),
-  role: z.enum(["VENDEUR", "LIVREUR"])
+  role: z.enum(["VENDEUR", "LIVREUR", "PHARMACIE", "BOULANGERIE"])
 });
 
 export async function POST(request: Request) {
   const session = await getSession();
   if (session.role !== "ADMIN") return NextResponse.json({ error: "Admin requis" }, { status: 403 });
   const payload = schema.parse(await request.json());
+  const commercialType = payload.role === "PHARMACIE" || payload.role === "BOULANGERIE";
+  const storedRole: "VENDEUR" | "LIVREUR" = commercialType ? "VENDEUR" : payload.role as "VENDEUR" | "LIVREUR";
+  const shopDescription = payload.role === "PHARMACIE"
+    ? "Pharmacie creee et verifiee par l'administration kanomenak."
+    : payload.role === "BOULANGERIE"
+      ? "Boulangerie creee et verifiee par l'administration kanomenak."
+      : "Boutique creee par l'administration kanomenak.";
   const user = await prisma.user.create({
     data: {
       name: payload.name,
       email: payload.email.toLowerCase(),
       phone: payload.phone,
-      role: payload.role,
+      role: storedRole,
+      accountType: payload.role,
       password: await bcrypt.hash(payload.password, 10),
-      shop: payload.role === "VENDEUR" ? {
+      shop: storedRole === "VENDEUR" ? {
         create: {
           name: payload.name,
           slug: payload.email.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-          description: "Boutique creee par l'administration kanomenak.",
+          description: shopDescription,
           city: "Dakar"
         }
       } : undefined
     }
   });
-  return NextResponse.json({ id: user.id, role: user.role, email: user.email, mustChangePassword: true }, { status: 201 });
+  return NextResponse.json({ id: user.id, role: user.role, accountType: user.accountType, email: user.email, mustChangePassword: true }, { status: 201 });
 }

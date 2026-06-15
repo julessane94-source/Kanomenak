@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Bell, CheckCircle, Download, Send, ShoppingBag, Trash2 } from "lucide-react";
 import type { Product } from "@/types";
 import { formatPrice } from "@/lib/data";
+import { AvailableCouriersPanel } from "@/components/couriers/available-couriers-panel";
 
 const paymentLabels = {
   WAVE: "Wave",
@@ -192,6 +193,7 @@ export function CartView() {
         {orderMessage && <p className="mt-3 rounded-md bg-emerald-50 p-3 text-sm font-black text-emerald-800"><CheckCircle className="inline size-4" /> {orderMessage}</p>}
         {vendorNotifications.length > 0 && <div className="mt-3 grid gap-2">{vendorNotifications.map((notice) => <p key={notice} className="rounded-md bg-sky-50 p-2 text-xs font-bold text-sky-800"><Send className="inline size-3" /> {notice}</p>)}</div>}
         <button type="button" onClick={downloadInvoice} disabled={!cart.length} className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-md border border-emerald-200 bg-white font-black text-emerald-800 disabled:cursor-not-allowed disabled:opacity-50"><Download className="size-4" /> Telecharger facture</button>
+        {cart.length > 0 && <div className="mt-4"><AvailableCouriersPanel compact title="Suggestions livreur" city={address} /></div>}
       </aside>
     </main>
   );

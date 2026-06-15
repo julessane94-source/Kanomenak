@@ -10,6 +10,19 @@ export type Partner = {
   image: string;
 };
 
+export type AvailableCourier = {
+  id: string;
+  name: string;
+  city: string;
+  zone: string;
+  phone: string;
+  rating: number;
+  deliveries: number;
+  fee: number;
+  eta: string;
+  available: boolean;
+};
+
 export const categories = [
   "Alimentation",
   "Fruits et legumes",
@@ -48,6 +61,13 @@ export const partners: Partner[] = [
   { type: "Pharmacies", slug: "pharmacie-sedhiou", name: "Pharmacie Sedhiou", city: "Sedhiou", description: "Point sante local pour les produits courants disponibles sur kanomenak.", rating: 4.6, image: "https://images.unsplash.com/photo-1576765608866-5b51046452be?q=80&w=1200&auto=format&fit=crop" },
   { type: "Boulangeries", slug: "boulangerie-medina", name: "Boulangerie Medina", city: "Dakar", description: "Boulangerie enrolee pour pains frais, baguettes et commandes du matin.", rating: 4.7, image: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?q=80&w=1200&auto=format&fit=crop" },
   { type: "Boulangeries", slug: "fournil-sedhiou", name: "Fournil Sedhiou", city: "Sedhiou", description: "Fournil local avec pains et viennoiseries disponibles en livraison.", rating: 4.6, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop" }
+];
+
+export const availableCouriers: AvailableCourier[] = [
+  { id: "courier-moussa", name: "Moussa Livraison", city: "Dakar", zone: "Plateau - Medina", phone: "+221765554010", rating: 4.7, deliveries: 69, fee: 1500, eta: "12 min", available: true },
+  { id: "courier-fatou", name: "Fatou Express", city: "Dakar", zone: "Almadies - Ngor", phone: "+221771112233", rating: 4.8, deliveries: 104, fee: 2000, eta: "18 min", available: true },
+  { id: "courier-ibra", name: "Ibra Sedhiou Courses", city: "Sedhiou", zone: "Sedhiou centre", phone: "+221775335320", rating: 4.6, deliveries: 37, fee: 1200, eta: "15 min", available: true },
+  { id: "courier-aminata", name: "Aminata Livraison", city: "Dakar", zone: "Pikine - Thiaroye", phone: "+221778851691", rating: 4.5, deliveries: 52, fee: 1800, eta: "22 min", available: false }
 ];
 
 export const adminKpis: Kpi[] = [
