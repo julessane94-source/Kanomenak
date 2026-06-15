@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: kanomenak-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kanomenak
+      POSTGRES_PASSWORD: kanomenak
+      POSTGRES_DB: kanomenak
+    ports:
+      - "5432:5432"
+    volumes:
+      - kanomenak_pgdata:/var/lib/postgresql/data
+
+volumes:
+  kanomenak_pgdata:

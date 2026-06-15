@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { MainNav } from "@/components/layout/main-nav";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
   title: "kanomenak - Marketplace locale",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <MainNav />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

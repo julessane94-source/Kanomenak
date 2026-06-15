@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { AlertTriangle, Heart, LayoutDashboard, LogIn, ShoppingBasket, Store, Tags, UserCircle, UserPlus } from "lucide-react";
+import { AlertTriangle, Croissant, Heart, LayoutDashboard, LogIn, Pill, ShoppingBasket, Store, Tags, UserCircle, UserPlus } from "lucide-react";
 import { LogoutButton } from "@/components/dashboard/logout-button";
 
 const links = [
   { href: "/", label: "Marche", icon: Store },
+  { href: "/?categorie=Pharmacies", label: "Pharmacies", icon: Pill },
+  { href: "/?categorie=Boulangeries", label: "Boulangeries", icon: Croissant },
   { href: "/categories", label: "Categories", icon: Tags },
   { href: "/panier", label: "Panier", icon: ShoppingBasket },
   { href: "/favoris", label: "Favoris", icon: Heart },
@@ -22,7 +24,7 @@ export async function MainNav() {
           <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-700 to-teal-900 text-white shadow-sm shadow-emerald-900/20">K</span>
           <span className="truncate">kanomenak</span>
         </Link>
-        <div className="hidden items-center rounded-2xl border border-emerald-100 bg-emerald-50/70 p-1.5 shadow-inner lg:flex">
+        <div className="hidden items-center rounded-2xl border border-emerald-100 bg-emerald-50/70 p-1.5 shadow-inner xl:flex">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-black text-slate-700 hover:-translate-y-0.5 hover:bg-white hover:text-emerald-800 hover:shadow-sm">
               <link.icon className="size-4" />
@@ -49,12 +51,12 @@ export async function MainNav() {
           </div>
         )}
       </nav>
-      <div className="border-t border-emerald-100 bg-white lg:hidden">
+      <div className="border-t border-emerald-100 bg-white xl:hidden">
         <div className="flex gap-2 overflow-x-auto px-3 py-2 [scrollbar-width:none]">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="flex min-w-[76px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-emerald-50 bg-emerald-50/70 px-2 py-2 text-[11px] font-black text-slate-700">
+            <Link key={link.href} href={link.href} className="flex min-w-[82px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-emerald-50 bg-emerald-50/70 px-2 py-2 text-[11px] font-black text-slate-700">
               <link.icon className="size-4" />
-              <span className="max-w-[72px] truncate">{link.label}</span>
+              <span className="max-w-[82px] truncate">{link.label}</span>
             </Link>
           ))}
           {isConnected ? (
