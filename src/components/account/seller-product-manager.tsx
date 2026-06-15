@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ImagePlus, Megaphone, PackagePlus, Pencil, Trash2 } from "lucide-react";
+import { AlertTriangle, ImagePlus, Megaphone, PackagePlus, Pencil, Trash2 } from "lucide-react";
 import { formatPrice, products } from "@/lib/data";
 
 type ProductRow = { id: string; name: string; price: number; stock: number; city: string; boosted?: boolean };
 
 export function SellerProductManager() {
-  const [rows, setRows] = useState<ProductRow[]>(products.slice(0, 5).map((product, index) => ({ id: product.id, name: product.name, price: product.price, stock: 24 + index * 6, city: product.city })));
+  const [rows, setRows] = useState<ProductRow[]>(products.slice(0, 5).map((product, index) => ({ id: product.id, name: product.name, price: product.price, stock: [28, 12, 9, 22, 14][index] || 18, city: product.city })));
   const [form, setForm] = useState({ name: "", price: "", stock: "", city: "Dakar", category: "Alimentation" });
   const [message, setMessage] = useState("");
+  const lowStock = rows.filter((product) => product.stock < 15);
 
   function publish() {
     if (!form.name || !form.price) {
@@ -37,9 +38,15 @@ export function SellerProductManager() {
       </section>
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-black text-slate-950">Catalogue boutique</h2>
+        {lowStock.length > 0 && (
+          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-bold text-amber-900">
+            <p className="flex items-center gap-2 font-black"><AlertTriangle className="size-4" /> Stock faible (-15 articles)</p>
+            <p className="mt-1">{lowStock.map((product) => product.name + " : " + product.stock).join(" · ")}</p>
+          </div>
+        )}
         <div className="mt-4 grid gap-3">{rows.map((p) => (
           <div key={p.id} className="grid gap-3 rounded-md bg-slate-50 p-3 md:grid-cols-[1fr_auto_auto] md:items-center">
-            <div><span className="font-bold">{p.name}</span><p className="text-xs font-semibold text-slate-500">{p.city} · {p.stock} en stock</p></div>
+            <div><span className="font-bold">{p.name}</span><p className={p.stock < 15 ? "text-xs font-black text-amber-700" : "text-xs font-semibold text-slate-500"}>{p.city} · {p.stock} en stock{p.stock < 15 ? " · stock faible" : ""}</p></div>
             <span>{formatPrice(p.price)}</span>
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => setRows((current) => current.map((item) => item.id === p.id ? { ...item, boosted: !item.boosted } : item))} className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-black text-white"><Megaphone className="inline size-4" /> {p.boosted ? "Boost actif" : "Booster"}</button>

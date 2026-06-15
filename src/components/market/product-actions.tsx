@@ -14,6 +14,21 @@ async function scopedKey(kind: "cart" | "favorites") {
   }
 }
 
+function notifySeller(product: Product) {
+  const key = "kanomenak-seller-notifications";
+  const current = JSON.parse(localStorage.getItem(key) || "[]");
+  const notice = {
+    id: String(Date.now()) + product.id,
+    seller: product.seller,
+    title: "Produit selectionne",
+    body: product.name + " vient d'etre ajoute au panier par un client.",
+    type: "selection",
+    createdAt: new Date().toISOString()
+  };
+  localStorage.setItem(key, JSON.stringify([notice, ...current].slice(0, 30)));
+  window.dispatchEvent(new CustomEvent("kanomenak-seller-notification"));
+}
+
 async function saveItem(kind: "cart" | "favorites", product: Product) {
   const key = await scopedKey(kind);
   const current = JSON.parse(localStorage.getItem(key) || "[]") as Product[];
@@ -21,6 +36,7 @@ async function saveItem(kind: "cart" | "favorites", product: Product) {
   const next = exists ? current : [...current, product];
   localStorage.setItem(key, JSON.stringify(next));
   window.dispatchEvent(new CustomEvent("kanomenak-storage", { detail: { key } }));
+  if (kind === "cart" && !exists) notifySeller(product);
 }
 
 export function ProductActions({ product }: { product: Product }) {
@@ -33,9 +49,9 @@ export function ProductActions({ product }: { product: Product }) {
         type="button"
         onClick={async () => {
           await saveItem("cart", product);
-          setStatus("Produit ajoute a votre panier");
+          setStatus("Produit ajoute au panier. Vendeur notifie.");
         }}
-        className="flex h-11 items-center justify-center gap-2 rounded-xl bg-emerald-800 px-4 font-black text-white shadow-sm shadow-emerald-900/20 hover:-translate-y-0.5 hover:bg-emerald-900"
+        className="flex h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-emerald-800 to-teal-700 px-4 font-black text-white shadow-sm shadow-emerald-900/25 hover:-translate-y-0.5 hover:from-emerald-950 hover:to-teal-800"
       >
         <ShoppingCart className="size-4" /> Panier
       </button>

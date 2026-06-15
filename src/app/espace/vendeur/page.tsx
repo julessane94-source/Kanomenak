@@ -6,6 +6,7 @@ import { ActionTile } from "@/components/dashboard/action-tile";
 import { StatusBoard } from "@/components/dashboard/status-board";
 import { NotificationCenter } from "@/components/notifications/notification-center";
 import { AvailableCouriersPanel } from "@/components/couriers/available-couriers-panel";
+import { SellerLiveNotifications } from "@/components/notifications/seller-live-notifications";
 import { sellerKpis, products } from "@/lib/data";
 import { AlertTriangle, Bell, ClipboardList, Megaphone, PackagePlus, Settings, Star, Store, UserCircle, Wallet } from "lucide-react";
 
@@ -13,6 +14,9 @@ export default function SellerDashboard() {
   return (
     <DashboardShell title="Tableau de bord vendeur" subtitle="Boutique, catalogue, commandes, revenus, avis, visibilite et securite du compte.">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{sellerKpis.map((kpi) => <KpiCard key={kpi.label} kpi={kpi} />)}</div>
+      <div className="mt-6">
+        <SellerLiveNotifications seller="Awa Boutique" lowStock={[{ name: "Smartphone 128 Go", stock: 12 }, { name: "Kit beaute naturel", stock: 9 }]} />
+      </div>
 
       <section className="mt-7">
         <div className="mb-4 flex items-end justify-between gap-4">
