@@ -13,6 +13,21 @@ const paymentLabels = {
   CASH_ON_DELIVERY: "Paiement a la livraison"
 };
 
+function notifySellerOrder(seller: string, body: string) {
+  const key = "kanomenak-seller-notifications";
+  const current = JSON.parse(localStorage.getItem(key) || "[]");
+  const notice = {
+    id: String(Date.now()) + seller,
+    seller,
+    title: "Nouvelle commande",
+    body,
+    type: "commande",
+    createdAt: new Date().toISOString()
+  };
+  localStorage.setItem(key, JSON.stringify([notice, ...current].slice(0, 30)));
+  window.dispatchEvent(new CustomEvent("kanomenak-seller-notification"));
+}
+
 export function CartView() {
   const [cart, setCart] = useState<Product[]>([]);
   const [cartKey, setCartKey] = useState("kanomenak-cart-anonymous");
@@ -136,6 +151,7 @@ export function CartView() {
       return;
     }
     const notices = sellers.map((group) => `Notification envoyee a ${group.seller} pour ${group.products.length} produit(s).`);
+    sellers.forEach((group) => notifySellerOrder(group.seller, `Commande ${data.code} : ${group.products.length} produit(s) a preparer.`));
     setVendorNotifications(notices);
     setOrderMessage(`Commande ${data.code} creee. Paiement ${paymentLabels[paymentMethod]} a valider pour ${formatPrice(total + deliveryFee)}.`);
   }
