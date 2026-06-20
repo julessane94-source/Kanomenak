@@ -99,10 +99,11 @@ async function main() {
 
   for (const product of productSeeds) {
     const category = await prisma.category.findUniqueOrThrow({ where: { slug: slugify(product.category) } });
+    const { category: _categoryName, ...productData } = product;
     await prisma.product.upsert({
       where: { id: slugify(product.name) },
-      update: { ...product, categoryId: category.id, sellerId: vendeur.id, shopId: shop.id },
-      create: { id: slugify(product.name), ...product, categoryId: category.id, sellerId: vendeur.id, shopId: shop.id }
+      update: { ...productData, categoryId: category.id, sellerId: vendeur.id, shopId: shop.id },
+      create: { id: slugify(product.name), ...productData, categoryId: category.id, sellerId: vendeur.id, shopId: shop.id }
     });
   }
 

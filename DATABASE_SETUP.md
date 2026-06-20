@@ -28,9 +28,10 @@ npm run db:seed
 npm run dev
 ```
 
-## Production Vercel
+## Production Vercel avec Neon
 
-Renseigner `DATABASE_URL` avec une base PostgreSQL hebergee, par exemple Neon, Supabase, Railway ou Vercel Postgres.
+Renseigner `DATABASE_URL` avec l'URL Neon pooled (hostname avec `-pooler`) et `DIRECT_URL` avec l'URL directe Neon (hostname sans `-pooler`).
+Executer ensuite `npm run db:init` avec ces variables pour creer les tables et les comptes seed dans la base en ligne.
 
 Comptes seed :
 - Admin : `julessane94@gmail.com` / `Baye1994@`
