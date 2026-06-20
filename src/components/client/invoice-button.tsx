@@ -5,10 +5,10 @@ import { Download } from "lucide-react";
 export function InvoiceButton({ orderCode }: { orderCode: string }) {
   function download() {
     const content = [
-      "FACTURE KANOMENAK",
+      "FACTURE NAFAA",
       "Commande: " + orderCode,
       "Date: " + new Date().toLocaleDateString("fr-FR"),
-      "Client: Client kanomenak",
+      "Client: Client Nafaa",
       "Total: 14 000 FCFA",
       "Paiement: a la livraison"
     ].join("\n");

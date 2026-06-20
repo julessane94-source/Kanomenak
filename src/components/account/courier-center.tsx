@@ -10,7 +10,7 @@ const initialMissions = [
 ];
 
 function openWhatsApp(phone: string, code: string) {
-  window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent("Bonjour, je suis le livreur kanomenak pour la commande " + code)}`, "_blank", "noopener,noreferrer");
+  window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent("Bonjour, je suis le livreur Nafaa pour la commande " + code)}`, "_blank", "noopener,noreferrer");
 }
 
 function openCall(phone: string) {

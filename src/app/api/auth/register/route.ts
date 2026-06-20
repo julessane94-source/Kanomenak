@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function POST(request: Request) {
   const payload = schema.parse(await request.json());
-  const email = payload.email?.toLowerCase() || `phone-${payload.phone!.replace(/\D/g, "")}@kanomenak.local`;
+  const email = payload.email?.toLowerCase() || `phone-${payload.phone!.replace(/\D/g, "")}@nafaa.local`;
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
     return NextResponse.json({ error: "Compte deja existant" }, { status: 409 });

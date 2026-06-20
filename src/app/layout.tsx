@@ -4,7 +4,7 @@ import { MainNav } from "@/components/layout/main-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
-  title: "kanomenak - Marketplace locale",
+  title: "Nafaa - Marketplace locale",
   description: "Marketplace intelligente pour clients, vendeurs et livreurs."
 };
 

@@ -54,7 +54,7 @@ export function AuthCard({ mode }: { mode: "login" | "signup" }) {
   return (
     <main className="mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl gap-8 px-4 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <section>
-        <p className="text-sm font-black uppercase text-emerald-700">kanomenak secure access</p>
+        <p className="text-sm font-black uppercase text-emerald-700">Nafaa secure access</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
           {isSignup ? "Creer un compte client" : "Connexion a votre espace"}
         </h1>

@@ -19,10 +19,10 @@ export async function POST(request: Request) {
   const commercialType = payload.role === "PHARMACIE" || payload.role === "BOULANGERIE";
   const storedRole: "VENDEUR" | "LIVREUR" = commercialType ? "VENDEUR" : payload.role as "VENDEUR" | "LIVREUR";
   const shopDescription = payload.role === "PHARMACIE"
-    ? "Pharmacie creee et verifiee par l'administration kanomenak."
+    ? "Pharmacie creee et verifiee par l'administration Nafaa."
     : payload.role === "BOULANGERIE"
-      ? "Boulangerie creee et verifiee par l'administration kanomenak."
-      : "Boutique creee par l'administration kanomenak.";
+      ? "Boulangerie creee et verifiee par l'administration Nafaa."
+      : "Boutique creee par l'administration Nafaa.";
   const userData: any = {
     name: payload.name,
     email: payload.email.toLowerCase(),

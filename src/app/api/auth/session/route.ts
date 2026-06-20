@@ -10,7 +10,7 @@ export async function GET() {
   return NextResponse.json({
     authenticated: Boolean(session),
     role,
-    cartKey: `kanomenak-cart-${storageSuffix}`,
-    favoritesKey: `kanomenak-favorites-${storageSuffix}`
+    cartKey: `Nafaa-cart-${storageSuffix}`,
+    favoritesKey: `Nafaa-favorites-${storageSuffix}`
   });
 }

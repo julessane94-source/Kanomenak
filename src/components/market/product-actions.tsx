@@ -8,14 +8,14 @@ async function scopedKey(kind: "cart" | "favorites") {
   try {
     const response = await fetch("/api/auth/session");
     const data = await response.json();
-    return kind === "cart" ? data.cartKey || "kanomenak-cart-anonymous" : data.favoritesKey || "kanomenak-favorites-anonymous";
+    return kind === "cart" ? data.cartKey || "Nafaa-cart-anonymous" : data.favoritesKey || "Nafaa-favorites-anonymous";
   } catch {
-    return kind === "cart" ? "kanomenak-cart-anonymous" : "kanomenak-favorites-anonymous";
+    return kind === "cart" ? "Nafaa-cart-anonymous" : "Nafaa-favorites-anonymous";
   }
 }
 
 function notifySeller(product: Product) {
-  const key = "kanomenak-seller-notifications";
+  const key = "Nafaa-seller-notifications";
   const current = JSON.parse(localStorage.getItem(key) || "[]");
   const notice = {
     id: String(Date.now()) + product.id,
@@ -26,7 +26,7 @@ function notifySeller(product: Product) {
     createdAt: new Date().toISOString()
   };
   localStorage.setItem(key, JSON.stringify([notice, ...current].slice(0, 30)));
-  window.dispatchEvent(new CustomEvent("kanomenak-seller-notification"));
+  window.dispatchEvent(new CustomEvent("Nafaa-seller-notification"));
 }
 
 async function saveItem(kind: "cart" | "favorites", product: Product) {
@@ -35,7 +35,7 @@ async function saveItem(kind: "cart" | "favorites", product: Product) {
   const exists = current.some((item) => item.id === product.id);
   const next = exists ? current : [...current, product];
   localStorage.setItem(key, JSON.stringify(next));
-  window.dispatchEvent(new CustomEvent("kanomenak-storage", { detail: { key } }));
+  window.dispatchEvent(new CustomEvent("Nafaa-storage", { detail: { key } }));
   if (kind === "cart" && !exists) notifySeller(product);
 }
 
@@ -69,7 +69,7 @@ export function ProductActions({ product }: { product: Product }) {
         <button
           type="button"
           onClick={() => {
-            const text = encodeURIComponent(`Bonjour, je suis interesse par le produit "${product.name}" sur kanomenak.`);
+            const text = encodeURIComponent(`Bonjour, je suis interesse par le produit "${product.name}" sur Nafaa.`);
             window.open(`https://wa.me/221770000000?text=${text}`, "_blank", "noopener,noreferrer");
             setContactOpen(true);
             setStatus("WhatsApp ouvert");
@@ -84,7 +84,7 @@ export function ProductActions({ product }: { product: Product }) {
         <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-3 text-sm text-emerald-950">
           <p className="font-black">{product.seller}</p>
           <p>WhatsApp : +221 77 000 00 00</p>
-          <p>Email : vendeur@kanomenak.com</p>
+          <p>Email : vendeur@nafaa.com</p>
         </div>
       )}
     </div>

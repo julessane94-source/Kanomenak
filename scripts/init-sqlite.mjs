@@ -124,11 +124,11 @@ CREATE TABLE Report (
 `);
 
 const insertUser = db.prepare("INSERT INTO User (id, name, email, password, role, city, rating) VALUES (?, ?, ?, ?, ?, ?, ?)");
-insertUser.run("u_admin", "Admin Kanomenak", "admin@kanomenak.com", "kanomenak123", "ADMIN", "Dakar", 0);
+insertUser.run("u_admin", "Admin Nafaa", "admin@nafaa.com", "nafaa123", "ADMIN", "Dakar", 0);
 insertUser.run("u_jules", "Jules Sane", "julessane94@gmail.com", "Baye1994@", "ADMIN", "Dakar", 0);
-insertUser.run("u_vendor", "Awa Boutique", "vendeur@kanomenak.com", "kanomenak123", "VENDEUR", "Dakar", 4.8);
-insertUser.run("u_courier", "Moussa Livraison", "livreur@kanomenak.com", "kanomenak123", "LIVREUR", "Dakar", 4.7);
-insertUser.run("u_client", "Client Demo", "client@kanomenak.com", "kanomenak123", "CLIENT", "Dakar", 0);
+insertUser.run("u_vendor", "Awa Boutique", "vendeur@nafaa.com", "nafaa123", "VENDEUR", "Dakar", 4.8);
+insertUser.run("u_courier", "Moussa Livraison", "livreur@nafaa.com", "nafaa123", "LIVREUR", "Dakar", 4.7);
+insertUser.run("u_client", "Client Demo", "client@nafaa.com", "nafaa123", "CLIENT", "Dakar", 0);
 
 db.prepare("INSERT INTO Shop (id, name, slug, description, city, ownerId) VALUES (?, ?, ?, ?, ?, ?)")
   .run("s_awa", "Awa Boutique", "awa-boutique", "Produits frais et articles populaires du marche urbain.", "Dakar", "u_vendor");

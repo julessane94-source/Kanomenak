@@ -7,15 +7,15 @@ export function CourierAvailabilityToggle() {
   const [available, setAvailable] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("kanomenak-courier-available");
+    const stored = localStorage.getItem("Nafaa-courier-available");
     if (stored !== null) setAvailable(stored === "true");
   }, []);
 
   function toggle() {
     const next = !available;
     setAvailable(next);
-    localStorage.setItem("kanomenak-courier-available", String(next));
-    window.dispatchEvent(new CustomEvent("kanomenak-courier-status", { detail: { available: next } }));
+    localStorage.setItem("Nafaa-courier-available", String(next));
+    window.dispatchEvent(new CustomEvent("Nafaa-courier-status", { detail: { available: next } }));
   }
 
   return (

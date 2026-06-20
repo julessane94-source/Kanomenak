@@ -1,4 +1,4 @@
-# Base de donnees kanomenak
+# Base de donnees Nafaa
 
 La plateforme est maintenant configuree pour PostgreSQL via Prisma.
 
@@ -34,6 +34,6 @@ Renseigner `DATABASE_URL` avec une base PostgreSQL hebergee, par exemple Neon, S
 
 Comptes seed :
 - Admin : `julessane94@gmail.com` / `Baye1994@`
-- Vendeur : `vendeur@kanomenak.com` / `kanomenak123`
-- Livreur : `livreur@kanomenak.com` / `kanomenak123`
-- Client : `client@kanomenak.com` / `kanomenak123`
+- Vendeur : `vendeur@nafaa.com` / `nafaa123`
+- Livreur : `livreur@nafaa.com` / `nafaa123`
+- Client : `client@nafaa.com` / `nafaa123`

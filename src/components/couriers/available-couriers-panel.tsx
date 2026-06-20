@@ -11,7 +11,7 @@ type Props = {
 };
 
 function openWhatsApp(phone: string, name: string) {
-  window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent("Bonjour " + name + ", livraison disponible sur kanomenak ?")}`, "_blank", "noopener,noreferrer");
+  window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent("Bonjour " + name + ", livraison disponible sur Nafaa ?")}`, "_blank", "noopener,noreferrer");
 }
 
 function openCall(phone: string) {
@@ -22,14 +22,14 @@ export function AvailableCouriersPanel({ compact = false, title = "Livreurs disp
   const [selfAvailable, setSelfAvailable] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("kanomenak-courier-available");
+    const stored = localStorage.getItem("Nafaa-courier-available");
     if (stored !== null) setSelfAvailable(stored === "true");
     const sync = (event: Event) => {
       const detail = (event as CustomEvent<{ available: boolean }>).detail;
       if (typeof detail?.available === "boolean") setSelfAvailable(detail.available);
     };
-    window.addEventListener("kanomenak-courier-status", sync);
-    return () => window.removeEventListener("kanomenak-courier-status", sync);
+    window.addEventListener("Nafaa-courier-status", sync);
+    return () => window.removeEventListener("Nafaa-courier-status", sync);
   }, []);
 
   const couriers = useMemo(() => {

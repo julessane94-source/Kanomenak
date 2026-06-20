@@ -22,7 +22,7 @@ export async function MainNav() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-3 sm:px-4">
         <Link href="/" className="flex min-w-0 items-center gap-2 text-lg font-black tracking-tight text-emerald-900 sm:text-xl">
           <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-700 to-teal-900 text-white shadow-sm shadow-emerald-900/20">K</span>
-          <span className="truncate">kanomenak</span>
+          <span className="truncate">Nafaa</span>
         </Link>
         <div className="hidden items-center rounded-2xl border border-emerald-100 bg-white/70 p-1.5 shadow-inner shadow-emerald-950/5 xl:flex">
           {links.map((link) => (

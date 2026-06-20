@@ -15,7 +15,7 @@ export function CategoriesView() {
       <section className="overflow-hidden rounded-2xl bg-emerald-950 text-white shadow-xl shadow-emerald-950/10">
         <div className="grid gap-6 p-6 md:p-8 lg:grid-cols-[1fr_420px] lg:items-end">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-sm font-black text-emerald-100"><Sparkles className="size-4" /> Rayons kanomenak</p>
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-sm font-black text-emerald-100"><Sparkles className="size-4" /> Rayons Nafaa</p>
             <h1 className="mt-5 text-4xl font-black tracking-tight md:text-5xl">Categories</h1>
             <p className="mt-2 text-sm font-semibold text-emerald-50">Navigation rapide par rayon.</p>
           </div>

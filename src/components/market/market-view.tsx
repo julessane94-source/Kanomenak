@@ -27,7 +27,7 @@ export function MarketView() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white/85 px-3 py-2 text-sm font-black text-emerald-700 shadow-sm"><Sparkles className="size-4" /> Marketplace locale</p>
-            <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl md:text-6xl">kanomenak</h1>
+            <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl md:text-6xl">Nafaa</h1>
             <p className="mt-4 max-w-xl text-base font-semibold leading-7 text-slate-600 sm:text-lg">Produits locaux, vendeurs verifies, livraison suivie.</p>
             <div className="mt-6 max-w-2xl rounded-2xl border border-emerald-100 bg-white p-2 shadow-xl shadow-emerald-950/10">
               <div className="flex items-center gap-2">

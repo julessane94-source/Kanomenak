@@ -8,10 +8,10 @@ export function FavoritesView() {
   const [favorites, setFavorites] = useState<Product[]>([]);
 
   useEffect(() => {
-    const load = () => setFavorites(JSON.parse(localStorage.getItem("kanomenak-favorites") || "[]"));
+    const load = () => setFavorites(JSON.parse(localStorage.getItem("Nafaa-favorites") || "[]"));
     load();
-    window.addEventListener("kanomenak-storage", load);
-    return () => window.removeEventListener("kanomenak-storage", load);
+    window.addEventListener("Nafaa-storage", load);
+    return () => window.removeEventListener("Nafaa-storage", load);
   }, []);
 
   return (

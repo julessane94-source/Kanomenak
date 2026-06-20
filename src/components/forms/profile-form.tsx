@@ -6,12 +6,12 @@ import { Camera, Save } from "lucide-react";
 export function ProfileForm() {
   const [photo, setPhoto] = useState("");
   const [message, setMessage] = useState("");
-  const [profile, setProfile] = useState({ name: "Utilisateur kanomenak", email: "client@kanomenak.com", phone: "+221 77 000 00 00", city: "Dakar" });
+  const [profile, setProfile] = useState({ name: "Utilisateur Nafaa", email: "client@nafaa.com", phone: "+221 77 000 00 00", city: "Dakar" });
 
   useEffect(() => {
-    const stored = localStorage.getItem("kanomenak-profile");
+    const stored = localStorage.getItem("Nafaa-profile");
     if (stored) setProfile(JSON.parse(stored));
-    const storedPhoto = localStorage.getItem("kanomenak-profile-photo");
+    const storedPhoto = localStorage.getItem("Nafaa-profile-photo");
     if (storedPhoto) setPhoto(storedPhoto);
   }, []);
 
@@ -22,14 +22,14 @@ export function ProfileForm() {
     reader.onload = () => {
       const value = String(reader.result);
       setPhoto(value);
-      localStorage.setItem("kanomenak-profile-photo", value);
+      localStorage.setItem("Nafaa-profile-photo", value);
     };
     reader.readAsDataURL(file);
   }
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    localStorage.setItem("kanomenak-profile", JSON.stringify(profile));
+    localStorage.setItem("Nafaa-profile", JSON.stringify(profile));
     setMessage("Profil mis a jour");
   }
 

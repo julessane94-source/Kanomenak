@@ -14,7 +14,7 @@ const paymentLabels = {
 };
 
 function notifySellerOrder(seller: string, body: string) {
-  const key = "kanomenak-seller-notifications";
+  const key = "Nafaa-seller-notifications";
   const current = JSON.parse(localStorage.getItem(key) || "[]");
   const notice = {
     id: String(Date.now()) + seller,
@@ -25,12 +25,12 @@ function notifySellerOrder(seller: string, body: string) {
     createdAt: new Date().toISOString()
   };
   localStorage.setItem(key, JSON.stringify([notice, ...current].slice(0, 30)));
-  window.dispatchEvent(new CustomEvent("kanomenak-seller-notification"));
+  window.dispatchEvent(new CustomEvent("Nafaa-seller-notification"));
 }
 
 export function CartView() {
   const [cart, setCart] = useState<Product[]>([]);
-  const [cartKey, setCartKey] = useState("kanomenak-cart-anonymous");
+  const [cartKey, setCartKey] = useState("Nafaa-cart-anonymous");
   const [authenticated, setAuthenticated] = useState(false);
   const [loginPrompt, setLoginPrompt] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<keyof typeof paymentLabels>("WAVE");
@@ -39,7 +39,7 @@ export function CartView() {
   const [vendorNotifications, setVendorNotifications] = useState<string[]>([]);
 
   useEffect(() => {
-    let activeKey = "kanomenak-cart-anonymous";
+    let activeKey = "Nafaa-cart-anonymous";
     const read = (key: string) => {
       try {
         return JSON.parse(localStorage.getItem(key) || "[]") as Product[];
@@ -49,18 +49,18 @@ export function CartView() {
     };
     const mergeUnique = (items: Product[]) => items.filter((product, index, list) => list.findIndex((item) => item.id === product.id) === index);
     const load = (key = activeKey) => {
-      const merged = mergeUnique([...read(key), ...read("kanomenak-cart"), ...read("kanomenak-cart-anonymous")]);
+      const merged = mergeUnique([...read(key), ...read("Nafaa-cart"), ...read("Nafaa-cart-anonymous")]);
       if (merged.length) {
         localStorage.setItem(key, JSON.stringify(merged));
-        localStorage.removeItem("kanomenak-cart");
-        if (key !== "kanomenak-cart-anonymous") localStorage.removeItem("kanomenak-cart-anonymous");
+        localStorage.removeItem("Nafaa-cart");
+        if (key !== "Nafaa-cart-anonymous") localStorage.removeItem("Nafaa-cart-anonymous");
       }
       setCart(merged);
     };
     fetch("/api/auth/session")
       .then((response) => response.json())
       .then((data) => {
-        activeKey = data.cartKey || "kanomenak-cart-anonymous";
+        activeKey = data.cartKey || "Nafaa-cart-anonymous";
         setCartKey(activeKey);
         setAuthenticated(Boolean(data.authenticated));
         load(activeKey);
@@ -73,10 +73,10 @@ export function CartView() {
       const detailKey = event instanceof CustomEvent ? event.detail?.key : null;
       if (!detailKey || detailKey === activeKey) load(activeKey);
     };
-    window.addEventListener("kanomenak-storage", onStorage);
+    window.addEventListener("Nafaa-storage", onStorage);
     window.addEventListener("storage", onStorage);
     return () => {
-      window.removeEventListener("kanomenak-storage", onStorage);
+      window.removeEventListener("Nafaa-storage", onStorage);
       window.removeEventListener("storage", onStorage);
     };
   }, []);
@@ -99,12 +99,12 @@ export function CartView() {
     const next = cart.filter((product) => product.id !== id);
     setCart(next);
     localStorage.setItem(cartKey, JSON.stringify(next));
-    window.dispatchEvent(new CustomEvent("kanomenak-storage", { detail: { key: cartKey } }));
+    window.dispatchEvent(new CustomEvent("Nafaa-storage", { detail: { key: cartKey } }));
   }
 
   function downloadInvoice() {
     const lines = [
-      "FACTURE KANOMENAK",
+      "FACTURE NAFAA",
       "Reference: KMK-" + Date.now().toString().slice(-6),
       "Date: " + new Date().toLocaleDateString("fr-FR"),
       "Paiement: " + paymentLabels[paymentMethod],
@@ -123,7 +123,7 @@ export function CartView() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "facture-kanomenak.txt";
+    a.download = "facture-Nafaa.txt";
     a.click();
     URL.revokeObjectURL(url);
   }

@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <DashboardShell title="Administration kanomenak" subtitle="Vue operationnelle basee sur les donnees actuellement presentes dans la plateforme.">
+    <DashboardShell title="Administration Nafaa" subtitle="Vue operationnelle basee sur les donnees actuellement presentes dans la plateforme.">
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {getAdminKpis().map((kpi) => <KpiCard key={kpi.label} kpi={kpi} />)}
       </section>

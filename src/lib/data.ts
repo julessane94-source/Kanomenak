@@ -58,7 +58,7 @@ export const products: Product[] = [
 
 export const partners: Partner[] = [
   { type: "Pharmacies", slug: "pharmacie-plateau", name: "Pharmacie Plateau", city: "Dakar", description: "Pharmacie enrolee avec produits de premiers soins, hygiene et commandes rapides.", rating: 4.8, image: "https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" },
-  { type: "Pharmacies", slug: "pharmacie-sedhiou", name: "Pharmacie Sedhiou", city: "Sedhiou", description: "Point sante local pour les produits courants disponibles sur kanomenak.", rating: 4.6, image: "https://images.unsplash.com/photo-1576765608866-5b51046452be?q=80&w=1200&auto=format&fit=crop" },
+  { type: "Pharmacies", slug: "pharmacie-sedhiou", name: "Pharmacie Sedhiou", city: "Sedhiou", description: "Point sante local pour les produits courants disponibles sur Nafaa.", rating: 4.6, image: "https://images.unsplash.com/photo-1576765608866-5b51046452be?q=80&w=1200&auto=format&fit=crop" },
   { type: "Boulangeries", slug: "boulangerie-medina", name: "Boulangerie Medina", city: "Dakar", description: "Boulangerie enrolee pour pains frais, baguettes et commandes du matin.", rating: 4.7, image: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?q=80&w=1200&auto=format&fit=crop" },
   { type: "Boulangeries", slug: "fournil-sedhiou", name: "Fournil Sedhiou", city: "Sedhiou", description: "Fournil local avec pains et viennoiseries disponibles en livraison.", rating: 4.6, image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop" }
 ];

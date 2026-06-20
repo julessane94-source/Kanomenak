@@ -8,11 +8,11 @@ type CreateRole = "VENDEUR" | "LIVREUR" | "PHARMACIE" | "BOULANGERIE";
 type UserRow = { name: string; role: ManagedRole; login: string; phone: string; status: string };
 
 const initialUsers: UserRow[] = [
-  { name: "Awa Boutique", role: "VENDEUR", login: "vendeur@kanomenak.com", phone: "+221 77 100 20 30", status: "Actif" },
-  { name: "Pharmacie Plateau", role: "PHARMACIE", login: "pharmacie@kanomenak.com", phone: "+221 77 885 16 91", status: "Etablissement enrole" },
-  { name: "Boulangerie Medina", role: "BOULANGERIE", login: "boulangerie@kanomenak.com", phone: "+221 77 533 53 20", status: "Etablissement enrole" },
-  { name: "Moussa Livraison", role: "LIVREUR", login: "livreur@kanomenak.com", phone: "+221 76 555 40 10", status: "Actif" },
-  { name: "Client Demo", role: "CLIENT", login: "client@kanomenak.com", phone: "+221 78 000 11 22", status: "Client autonome" }
+  { name: "Awa Boutique", role: "VENDEUR", login: "vendeur@nafaa.com", phone: "+221 77 100 20 30", status: "Actif" },
+  { name: "Pharmacie Plateau", role: "PHARMACIE", login: "pharmacie@nafaa.com", phone: "+221 77 885 16 91", status: "Etablissement enrole" },
+  { name: "Boulangerie Medina", role: "BOULANGERIE", login: "boulangerie@nafaa.com", phone: "+221 77 533 53 20", status: "Etablissement enrole" },
+  { name: "Moussa Livraison", role: "LIVREUR", login: "livreur@nafaa.com", phone: "+221 76 555 40 10", status: "Actif" },
+  { name: "Client Demo", role: "CLIENT", login: "client@nafaa.com", phone: "+221 78 000 11 22", status: "Client autonome" }
 ];
 
 function RoleIcon({ role }: { role: ManagedRole }) {

@@ -12,7 +12,7 @@ type SellerNotice = {
   createdAt: string;
 };
 
-const storageKey = "kanomenak-seller-notifications";
+const storageKey = "Nafaa-seller-notifications";
 
 function readNotices() {
   try {
@@ -25,7 +25,7 @@ function readNotices() {
 export function pushSellerNotification(notice: Omit<SellerNotice, "id" | "createdAt">) {
   const next = [{ ...notice, id: String(Date.now()) + Math.random().toString(16).slice(2), createdAt: new Date().toISOString() }, ...readNotices()].slice(0, 30);
   localStorage.setItem(storageKey, JSON.stringify(next));
-  window.dispatchEvent(new CustomEvent("kanomenak-seller-notification"));
+  window.dispatchEvent(new CustomEvent("Nafaa-seller-notification"));
 }
 
 export function SellerLiveNotifications({ seller = "Awa Boutique", lowStock = [] }: { seller?: string; lowStock?: { name: string; stock: number }[] }) {
@@ -35,10 +35,10 @@ export function SellerLiveNotifications({ seller = "Awa Boutique", lowStock = []
   useEffect(() => {
     const load = () => setItems(readNotices());
     load();
-    window.addEventListener("kanomenak-seller-notification", load);
+    window.addEventListener("Nafaa-seller-notification", load);
     window.addEventListener("storage", load);
     return () => {
-      window.removeEventListener("kanomenak-seller-notification", load);
+      window.removeEventListener("Nafaa-seller-notification", load);
       window.removeEventListener("storage", load);
     };
   }, []);

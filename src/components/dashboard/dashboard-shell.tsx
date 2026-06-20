@@ -9,7 +9,7 @@ export function DashboardShell({ title, subtitle, children }: { title: string; s
         <div className="relative mx-auto max-w-7xl px-4 py-7 sm:py-9">
           <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-black uppercase text-emerald-100"><BarChart3 className="size-4" /> kanomenak workspace</p>
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-black uppercase text-emerald-100"><BarChart3 className="size-4" /> Nafaa workspace</p>
               <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">{title}</h1>
               <p className="mt-3 max-w-2xl text-sm font-semibold leading-6 text-emerald-50">{subtitle}</p>
             </div>

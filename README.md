@@ -1,4 +1,4 @@
-# kanomenak
+# Nafaa
 
 Marketplace moderne reliant clients, vendeurs, livreurs et administrateurs.
 
@@ -23,9 +23,9 @@ npm run dev
 
 Comptes demo seed :
 
-- admin@kanomenak.com
-- vendeur@kanomenak.com
-- livreur@kanomenak.com
-- client@kanomenak.com
+- admin@nafaa.com
+- vendeur@nafaa.com
+- livreur@nafaa.com
+- client@nafaa.com
 
-Mot de passe : kanomenak123
+Mot de passe : nafaa123
