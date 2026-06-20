@@ -23,23 +23,24 @@ export async function POST(request: Request) {
     : payload.role === "BOULANGERIE"
       ? "Boulangerie creee et verifiee par l'administration kanomenak."
       : "Boutique creee par l'administration kanomenak.";
+  const userData: any = {
+    name: payload.name,
+    email: payload.email.toLowerCase(),
+    phone: payload.phone,
+    role: storedRole,
+    accountType: payload.role,
+    password: await bcrypt.hash(payload.password, 10),
+    shop: storedRole === "VENDEUR" ? {
+      create: {
+        name: payload.name,
+        slug: payload.email.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        description: shopDescription,
+        city: "Dakar"
+      }
+    } : undefined
+  };
   const user = await prisma.user.create({
-    data: {
-      name: payload.name,
-      email: payload.email.toLowerCase(),
-      phone: payload.phone,
-      role: storedRole,
-      accountType: payload.role,
-      password: await bcrypt.hash(payload.password, 10),
-      shop: storedRole === "VENDEUR" ? {
-        create: {
-          name: payload.name,
-          slug: payload.email.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-          description: shopDescription,
-          city: "Dakar"
-        }
-      } : undefined
-    }
+    data: userData
   });
-  return NextResponse.json({ id: user.id, role: user.role, accountType: user.accountType, email: user.email, mustChangePassword: true }, { status: 201 });
+  return NextResponse.json({ id: user.id, role: user.role, accountType: (user as any).accountType || payload.role, email: user.email, mustChangePassword: true }, { status: 201 });
 }
